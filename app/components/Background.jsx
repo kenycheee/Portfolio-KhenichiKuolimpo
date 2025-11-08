@@ -1,12 +1,12 @@
 'use client';
-import Particles from "../../components/Particles";
+import Particles from "../../components/Background/Particles";
 
 export default function Background() {
   return (
     <div className="fixed inset-0 w-full h-full overflow-hidden z-0">
       <Particles
-        particleColors={['#000000', '#000000']}
-        particleCount={200}
+        particleColors={['#21214f', '#36295f']}
+        particleCount={300}
         particleSpread={10}
         speed={0.1}
         particleBaseSize={100}

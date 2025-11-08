@@ -29,16 +29,16 @@ export default function NavBar() {
         className={`fixed top-0 left-0 w-full transition-all duration-500 ${
           isScrolled
             ? "bg-[#0b1220cc] backdrop-blur-md shadow-sm"
-            : "bg-[#0b1220] shadow-md"
+            : "bg-[#0f0f2b] shadow-md"
         } z-40`}
       >
-      <div className="flex items-center justify-between max-w-7xl mx-auto px-4 md:px-12 py-4 md:py-6">
-        <div className="flex-shrink-0">
+      <div className="flex items-center justify-between max-w-[85rem] mx-auto px-4 md:px-12 py-4 md:py-6">
+        <div>
           <GradientText
-            colors={["#e3f8ef", "#7ba2fb", "#e3f8ef"]}
-            animationSpeed={10}
-            showBorder={true}
-            className="text-2xl font-semibold tracking-wide select-none px-4 -mr-10"
+            colors={["#8df4ffff", "#f3ffa5ff", "#81ffc9ff"]}
+            animationSpeed={3}
+            showBorder={false}
+            className="text-4xl tracking-wide select-none px-4 -mr-10"
           >
             Khenichi Kuolimpo
           </GradientText>
