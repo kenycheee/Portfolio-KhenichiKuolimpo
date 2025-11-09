@@ -144,7 +144,7 @@ export const LogoLoop = memo(
     width = '100%',
     logoHeight = 28,
     gap = 32,
-    pauseOnHover = true,
+    pauseOnHover = false,
     fadeOut = false,
     fadeOutColor,
     scaleOnHover = false,

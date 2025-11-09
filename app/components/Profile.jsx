@@ -2,6 +2,9 @@
 
 import ChromaGrid from "../../components/ChromaGrid";
 import RotatingText from "../../components/RotatingText";
+import LogoLoop from "../../components/LogoLoop";
+
+// import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
 
 export default function Profile() {
   const items = [
@@ -12,6 +15,37 @@ export default function Profile() {
       handle: "Information Technology",
       gradient: "linear-gradient(145deg, rgba(72, 62, 255, 0.4), var(--main))",
     },
+  ];
+
+  const imageLogos = [
+    { src: "https://skillicons.dev/icons?i=html", alt: "HTML5" },
+    { src: "https://skillicons.dev/icons?i=css", alt: "CSS3" },
+    { src: "https://skillicons.dev/icons?i=js", alt: "JavaScript" },
+    { src: "https://skillicons.dev/icons?i=java", alt: "Java" },
+    { src: "https://skillicons.dev/icons?i=dart", alt: "Dart" },
+    { src: "https://skillicons.dev/icons?i=cpp", alt: "C++" },
+    { src: "https://skillicons.dev/icons?i=php", alt: "PHP" },
+    { src: "https://skillicons.dev/icons?i=python", alt: "Python" },
+    { src: "https://skillicons.dev/icons?i=react", alt: "React" },
+    { src: "https://skillicons.dev/icons?i=next", alt: "Next.js" },
+    { src: "https://skillicons.dev/icons?i=flutter", alt: "Flutter" },
+    { src: "https://skillicons.dev/icons?i=laravel", alt: "Laravel" },
+    { src: "https://skillicons.dev/icons?i=nodejs", alt: "Node.js" },
+    { src: "https://skillicons.dev/icons?i=jquery", alt: "jQuery" },
+    { src: "https://skillicons.dev/icons?i=tailwind", alt: "Tailwind CSS" },
+    { src: "https://skillicons.dev/icons?i=bootstrap", alt: "Bootstrap" },
+    { src: "https://skillicons.dev/icons?i=firebase", alt: "Firebase" },
+    { src: "https://skillicons.dev/icons?i=mongodb", alt: "MongoDB" },
+    { src: "https://skillicons.dev/icons?i=postgres", alt: "PostgreSQL" },
+    { src: "https://skillicons.dev/icons?i=vercel", alt: "Vercel" },
+    { src: "https://skillicons.dev/icons?i=github", alt: "GitHub" },
+    { src: "https://skillicons.dev/icons?i=git", alt: "Git" },
+    { src: "https://skillicons.dev/icons?i=vscode", alt: "VS Code" },
+    { src: "https://skillicons.dev/icons?i=figma", alt: "Figma" },
+    { src: "https://skillicons.dev/icons?i=ps", alt: "Photoshop" },
+    { src: "https://skillicons.dev/icons?i=htmx", alt: "HTMX" },
+    { src: "https://skillicons.dev/icons?i=postman", alt: "Postman" },
+    { src: "https://skillicons.dev/icons?i=pr", alt: "Premiere Pro" }
   ];
 
   return (
@@ -38,10 +72,24 @@ export default function Profile() {
           />
         </div>
 
-        <div className="relative origin-left -mt-3 text-[var(--blacktext)] bg-[var(--background)]">
-          <p className="-mr-30 pl-1">
+        <div className="relative origin-left -mt-1 text-[var(--blacktext)] bg-[var(--background)]">
+          <p className="-mr-30 pl-1 text-base">
             Information Technology Student • Passionate • Fast and Eager to learn • Adaptable • Proactive
           </p>
+        </div>
+
+        <div className="mt-5 w-full overflow-hidden">
+          <LogoLoop
+            logos={imageLogos}
+            speed={120}
+            direction="left"
+            logoHeight={60}
+            gap={40}
+            scaleOnHover
+            fadeOut
+            fadeOutColor="#ffffff"
+            ariaLabel="Technology partners"
+          />
         </div>
       </div>
 

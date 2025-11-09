@@ -141,7 +141,7 @@ export default function ChromaGrid({
           style={{
             '--card-border': c.borderColor || 'transparent',
             background: c.gradient,
-            '--spotlight-color': 'rgba(255,255,255,0.3)'
+            '--spotlight-color': 'rgba(0, 110, 255, 0.3)'
           }}
         >
           {/* Spotlight hover layer */}
@@ -177,41 +177,6 @@ export default function ChromaGrid({
           </footer>
         </article>
       ))}
-
-      {/* === Overlay masks === */}
-      <div className="absolute inset-0 rounded-[20px] overflow-hidden pointer-events-none">
-        {/* Grayscale overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none z-30"
-          style={{
-            borderRadius: '20px',
-            backdropFilter: 'grayscale(1) brightness(0.78)',
-            WebkitBackdropFilter: 'grayscale(1) brightness(0.78)',
-            background: 'rgba(0,0,0,0.001)',
-            maskImage:
-              'radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0%,transparent 15%,rgba(0,0,0,0.10)30%,rgba(0,0,0,0.22)45%,rgba(0,0,0,0.35)60%,rgba(0,0,0,0.50)75%,rgba(0,0,0,0.68)88%,white 100%)',
-            WebkitMaskImage:
-              'radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0%,transparent 15%,rgba(0,0,0,0.10)30%,rgba(0,0,0,0.22)45%,rgba(0,0,0,0.35)60%,rgba(0,0,0,0.50)75%,rgba(0,0,0,0.68)88%,white 100%)'
-          }}
-        />
-
-        {/* Fade mask */}
-        <div
-          ref={fadeRef}
-          className="absolute inset-0 pointer-events-none z-40 transition-opacity duration-200"
-          style={{
-            borderRadius: '20px',
-            backdropFilter: 'grayscale(1) brightness(0.78)',
-            WebkitBackdropFilter: 'grayscale(1) brightness(0.78)',
-            background: 'rgba(0,0,0,0.001)',
-            maskImage:
-              'radial-gradient(circle var(--r) at var(--x) var(--y),white 0%,white 15%,rgba(255,255,255,0.90)30%,rgba(255,255,255,0.78)45%,rgba(255,255,255,0.65)60%,rgba(255,255,255,0.50)75%,rgba(255,255,255,0.32)88%,transparent 100%)',
-            WebkitMaskImage:
-              'radial-gradient(circle var(--r) at var(--x) var(--y),white 0%,white 15%,rgba(255,255,255,0.90)30%,rgba(255,255,255,0.78)45%,rgba(255,255,255,0.65)60%,rgba(255,255,255,0.50)75%,rgba(255,255,255,0.32)88%,transparent 100%)',
-            opacity: 1
-          }}
-        />
-      </div>
     </div>
   );
 }

@@ -1,24 +1,37 @@
 /**
  * GradientText Component
  *
- * A React component that renders text with a looping animated gradient effect.
- * Optionally, it can also display a matching animated gradient border around the text container.
+ * A React component that renders animated gradient text with an optional glowing border.
+ * The gradient smoothly animates across the text, creating a dynamic colorful effect.
+ * No visible background or box is rendered — only the text (and optional border glow) is shown.
  *
  * @component
  * @param {object} props - Component props.
- * @param {React.ReactNode} props.children - The content or text inside the component.
- * @param {string} [props.className=''] - Optional custom CSS classes for external styling.
- * @param {string[]} [props.colors=['#ffaa40', '#9c40ff', '#ffaa40']] - Array of gradient colors.
- * @param {number} [props.animationSpeed=8] - Gradient animation speed (in seconds).
- * @param {boolean} [props.showBorder=false] - Whether to display an animated gradient border.
+ * @param {React.ReactNode} props.children - The text or content inside the component.
+ * @param {string} [props.className=''] - Optional Tailwind or custom class names for external styling.
+ * @param {string[]} [props.colors=['#ffaa40', '#9c40ff', '#ffaa40']] - Array of gradient colors used for animation.
+ * @param {number} [props.animationSpeed=8] - Duration (in seconds) of one full gradient animation loop.
+ * @param {boolean} [props.showBorder=false] - Whether to render a glowing animated border outline around the text.
  *
  * @example
+ * // Basic animated gradient text
+ * <GradientText>
+ *   Hello World
+ * </GradientText>
+ *
+ * @example
+ * // With custom colors and faster animation
  * <GradientText
- *   colors={['#ff4d4d', '#4dff91']}
- *   animationSpeed={6}
- *   showBorder
+ *   colors={['#ff4d4d', '#4dff91', '#4da6ff']}
+ *   animationSpeed={5}
  * >
- *   Animated Gradient Text
+ *   Fast Gradient Text
+ * </GradientText>
+ *
+ * @example
+ * // With glowing animated border
+ * <GradientText showBorder className="text-5xl font-bold">
+ *   Gradient Glow
  * </GradientText>
  */
 
@@ -29,51 +42,41 @@ export default function GradientText({
   animationSpeed = 8,
   showBorder = false
 }) {
-  /** CSS variables for gradient and animation speed */
+  // Gradient animation styling
   const gradientStyle = {
     backgroundImage: `linear-gradient(to right, ${colors.join(', ')})`,
     animationDuration: `${animationSpeed}s`
   };
 
   return (
-    <div
-      className={`relative mx-auto flex max-w-fit flex-row items-center justify-center rounded-[1.25rem] font-medium backdrop-blur transition-shadow duration-500 overflow-hidden cursor-pointer ${className}`}
-    >
-      {/* Optional animated gradient border */}
-      {showBorder && (
-        <div
-          className="absolute inset-0 bg-cover z-0 pointer-events-none animate-gradient"
-          style={{
-            ...gradientStyle,
-            backgroundSize: '300% 100%'
-          }}
-        >
-          {/* Inner dark overlay for stronger gradient contrast */}
-          <div
-            className="absolute inset-0 bg-black rounded-[1.25rem] z-[-1]"
-            style={{
-              width: 'calc(100% - 2px)',
-              height: 'calc(100% - 2px)',
-              left: '50%',
-              top: '50%',
-              transform: 'translate(-50%, -50%)'
-            }}
-          ></div>
-        </div>
-      )}
-
+    <div className={`relative inline-block ${className}`}>
       {/* Animated gradient text */}
-      <div
-        className="inline-block relative z-2 text-transparent bg-cover animate-gradient"
+      <span
+        className="text-transparent bg-cover animate-gradient"
         style={{
           ...gradientStyle,
           backgroundClip: 'text',
           WebkitBackgroundClip: 'text',
-          backgroundSize: '300% 100%'
+          backgroundSize: '300% 100%',
         }}
       >
         {children}
-      </div>
+      </span>
+
+      {/* Optional glowing border effect */}
+      {showBorder && (
+        <span
+          className="absolute inset-0 rounded-lg border border-transparent pointer-events-none animate-gradient"
+          style={{
+            ...gradientStyle,
+            backgroundImage: `linear-gradient(to right, ${colors.join(', ')})`,
+            WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+            WebkitMaskComposite: 'xor',
+            maskComposite: 'exclude',
+            backgroundSize: '300% 100%',
+          }}
+        />
+      )}
     </div>
   );
 }
