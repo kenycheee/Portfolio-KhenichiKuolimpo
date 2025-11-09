@@ -1,8 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Renderer, Camera, Geometry, Program, Mesh } from 'ogl';
 
-import './Particles.css';
-
 const defaultColors = ['#ffffff', '#ffffff', '#ffffff'];
 
 const hexToRgb = hex => {
@@ -90,7 +88,7 @@ const Particles = ({
   particleSpread = 10,
   speed = 0.1,
   particleColors,
-  moveParticlesOnHover = true,
+  moveParticlesOnHover = false,
   particleHoverFactor = 1,
   alphaParticles = false,
   particleBaseSize = 100,
@@ -232,7 +230,7 @@ const Particles = ({
     disableRotation
   ]);
 
-  return <div ref={containerRef} className={`particles-container ${className}`} />;
+  return <div ref={containerRef} className={`relative w-full h-full ${className}`} />;
 };
 
 export default Particles;

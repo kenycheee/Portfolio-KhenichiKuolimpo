@@ -1,17 +1,16 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-import './ChromaGrid.css';
 
-export const ChromaGrid = ({
+const ChromaGrid = ({
   items,
   className = '',
-  radius = 100,
-  columns = 1,
-  rows = 1,
+  radius = 220,
   damping = 0.45,
+  fadeOut = 0.6,
   ease = 'power3.out'
 }) => {
   const rootRef = useRef(null);
+  const fadeRef = useRef(null);
   const setX = useRef(null);
   const setY = useRef(null);
   const pos = useRef({ x: 0, y: 0 });
@@ -22,7 +21,7 @@ export const ChromaGrid = ({
       title: 'Alex Rivera',
       subtitle: 'Full Stack Developer',
       handle: '@alexrivera',
-      borderColor: '#4F46E5',
+      borderColor: '#559b70ff',
       gradient: 'linear-gradient(145deg, #4F46E5, #000)',
       url: 'https://github.com/'
     },
@@ -58,6 +57,15 @@ export const ChromaGrid = ({
   const handleMove = e => {
     const r = rootRef.current.getBoundingClientRect();
     moveTo(e.clientX - r.left, e.clientY - r.top);
+    gsap.to(fadeRef.current, { opacity: 0, duration: 0.25, overwrite: true });
+  };
+
+  const handleLeave = () => {
+    gsap.to(fadeRef.current, {
+      opacity: 1,
+      duration: fadeOut,
+      overwrite: true
+    });
   };
 
   const handleCardClick = url => {
@@ -65,47 +73,101 @@ export const ChromaGrid = ({
   };
 
   const handleCardMove = e => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    card.style.setProperty('--mouse-x', `${x}px`);
-    card.style.setProperty('--mouse-y', `${y}px`);
+    const c = e.currentTarget;
+    const rect = c.getBoundingClientRect();
+    c.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+    c.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
   };
 
   return (
     <div
       ref={rootRef}
-      className={`chroma-grid ${className}`}
+      onPointerMove={handleMove}
+      onPointerLeave={handleLeave}
+      className={`relative grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] justify-center items-center gap-4 w-fit h-fit mx-auto box-border ${className}`}
       style={{
         '--r': `${radius}px`,
-        '--cols': columns,
-        '--rows': rows
+        '--x': '50%',
+        '--y': '50%'
       }}
-      onPointerMove={handleMove}
     >
       {data.map((c, i) => (
         <article
           key={i}
-          className="chroma-card"
           onMouseMove={handleCardMove}
           onClick={() => handleCardClick(c.url)}
+          className="relative flex flex-col w-[320px] rounded-[20px] overflow-hidden border border-[#333] transition duration-300 ease-in-out hover:border-[var(--card-border)] cursor-pointer"
           style={{
             '--card-border': c.borderColor || 'transparent',
-            '--card-gradient': c.gradient,
-            cursor: c.url ? 'pointer' : 'default'
+            background: c.gradient,
+            '--spotlight-color': 'rgba(255,255,255,0.3)'
           }}
         >
-          <div className="chroma-img-wrapper">
-            <img src={c.image} alt={c.title} loading="lazy" />
+          {/* Spotlight hover */}
+          <div
+            className="absolute inset-0 opacity-0 transition-opacity duration-500 pointer-events-none z-10 hover:opacity-100"
+            style={{
+              background:
+                'radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%)'
+            }}
+          />
+
+          {/* Image */}
+          <div className="relative z-10 w-full h-[320px] overflow-hidden">
+            <img
+              src={c.image}
+              alt={c.title}
+              loading="lazy"
+              className="w-full h-full object-cover rounded-t-[14px] block"
+            />
           </div>
-          <footer className="chroma-info">
-            <h3 className="name">{c.title}</h3>
-            {c.handle && <span className="handle">{c.handle}</span>}
-            <p className="role">{c.subtitle}</p>
+
+          {/* Info */}
+          <footer className="relative z-20 w-full p-4 text-center text-white backdrop-blur-md bg-black/45 border-t border-white/10 flex flex-col items-center gap-1 rounded-b-[14px] transition-all duration-300 hover:bg-black/65">
+            <h3 className="text-[1.45rem] font-bold m-0 tracking-[0.5px]">{c.title}</h3>
+            {c.handle && (
+              <span className="mt-[0.4rem] text-[0.9rem] font-medium text-white bg-white/15 border border-white/25 rounded-full px-3 py-[0.25rem] backdrop-blur-sm transition-all duration-300 hover:bg-neutral-700/30">
+                {c.handle}
+              </span>
+            )}
+            <p className="text-[1rem] text-[#e0e0e0] font-normal leading-[1.4] m-0">
+              {c.subtitle}
+            </p>
           </footer>
         </article>
       ))}
+
+      <div className="absolute inset-0 rounded-[20px] overflow-hidden pointer-events-none">
+        {/* Overlay mask */}
+        <div
+          className="absolute inset-0 pointer-events-none z-30"
+          style={{
+            backdropFilter: 'grayscale(1) brightness(0.78)',
+            WebkitBackdropFilter: 'grayscale(1) brightness(0.78)',
+            background: 'rgba(0,0,0,0.001)',
+            maskImage:
+              'radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0%,transparent 15%,rgba(0,0,0,0.10)30%,rgba(0,0,0,0.22)45%,rgba(0,0,0,0.35)60%,rgba(0,0,0,0.50)75%,rgba(0,0,0,0.68)88%,white 100%)',
+            WebkitMaskImage:
+              'radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0%,transparent 15%,rgba(0,0,0,0.10)30%,rgba(0,0,0,0.22)45%,rgba(0,0,0,0.35)60%,rgba(0,0,0,0.50)75%,rgba(0,0,0,0.68)88%,white 100%)'
+          }}
+        />
+
+        {/* Fade mask */}
+        <div
+          ref={fadeRef}
+          className="absolute inset-0 pointer-events-none z-40 transition-opacity duration-200"
+          style={{
+            backdropFilter: 'grayscale(1) brightness(0.78)',
+            WebkitBackdropFilter: 'grayscale(1) brightness(0.78)',
+            background: 'rgba(0,0,0,0.001)',
+            maskImage:
+              'radial-gradient(circle var(--r) at var(--x) var(--y),white 0%,white 15%,rgba(255,255,255,0.90)30%,rgba(255,255,255,0.78)45%,rgba(255,255,255,0.65)60%,rgba(255,255,255,0.50)75%,rgba(255,255,255,0.32)88%,transparent 100%)',
+            WebkitMaskImage:
+              'radial-gradient(circle var(--r) at var(--x) var(--y),white 0%,white 15%,rgba(255,255,255,0.90)30%,rgba(255,255,255,0.78)45%,rgba(255,255,255,0.65)60%,rgba(255,255,255,0.50)75%,rgba(255,255,255,0.32)88%,transparent 100%)',
+            opacity: 1
+          }}
+        />
+      </div>
     </div>
   );
 };
