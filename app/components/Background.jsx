@@ -5,7 +5,7 @@ export default function Background() {
   return (
     <div className="fixed inset-0 w-full h-full overflow-hidden z-0">
       <Particles
-        particleColors={['#21214f', '#36295f']}
+        particleColors={['#373785', '#8361f3']}
         particleCount={300}
         particleSpread={10}
         speed={0.1}

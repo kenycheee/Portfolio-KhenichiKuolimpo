@@ -35,7 +35,7 @@ export default function NavBar() {
       <div className="flex items-center justify-between max-w-[85rem] mx-auto px-4 md:px-12 py-4 md:py-6">
         <div>
           <GradientText
-            colors={["#8df4ffff", "#f3ffa5ff", "#81ffc9ff"]}
+            colors={["#8df4ff", "#f3ffa5", "#81ffc9"]}
             animationSpeed={3}
             showBorder={false}
             className="text-4xl tracking-wide select-none px-4 -mr-10"
