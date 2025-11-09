@@ -3,10 +3,59 @@
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
+/**
+ * Utility function to combine multiple class names conditionally.
+ * @param {...(string|boolean|undefined)} classes - Class names to join.
+ * @returns {string} Combined class name string.
+ */
 function cn(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
+/**
+ * RotatingText Component
+ * 
+ * Animated text rotator that cycles through multiple strings with smooth
+ * motion transitions, supporting per-character, per-word, or per-line animation.
+ * 
+ * @component
+ * @example
+ * ```jsx
+ * <RotatingText
+ *   texts={["Hello", "World", "Animations!"]}
+ *   rotationInterval={2000}
+ *   splitBy="characters"
+ *   staggerDuration={0.05}
+ * />
+ * ```
+ * 
+ * @param {Object} props - Component props.
+ * @param {string[]} props.texts - Array of text strings to rotate through.
+ * @param {Object} [props.transition={ type: 'spring', damping: 25, stiffness: 300 }] - Motion transition config.
+ * @param {Object} [props.initial={ y: '100%', opacity: 0 }] - Initial animation state for text segments.
+ * @param {Object} [props.animate={ y: 0, opacity: 1 }] - Target animation state for text segments.
+ * @param {Object} [props.exit={ y: '-120%', opacity: 0 }] - Exit animation state for text segments.
+ * @param {'wait'|'sync'|'popLayout'} [props.animatePresenceMode='wait'] - AnimatePresence mode.
+ * @param {boolean} [props.animatePresenceInitial=false] - Whether AnimatePresence starts with initial animation.
+ * @param {number} [props.rotationInterval=2000] - Time interval (ms) between text rotations.
+ * @param {number} [props.staggerDuration=0] - Delay between animating each character.
+ * @param {'first'|'last'|'center'|'random'|number} [props.staggerFrom='first'] - Animation stagger origin.
+ * @param {boolean} [props.loop=true] - Whether the rotation loops indefinitely.
+ * @param {boolean} [props.auto=true] - Whether to auto-rotate text automatically.
+ * @param {'characters'|'words'|'lines'|string} [props.splitBy='characters'] - How to split text before animating.
+ * @param {function} [props.onNext] - Callback fired when text changes to the next index.
+ * @param {string} [props.mainClassName] - Class applied to main wrapper span.
+ * @param {string} [props.splitLevelClassName] - Class applied to each word/line container.
+ * @param {string} [props.elementLevelClassName] - Class applied to each animated element (char/word).
+ * @param {...any} rest - Additional props passed to the outer motion span.
+ * 
+ * @property {Function} next - Manually trigger next rotation.
+ * @property {Function} previous - Manually trigger previous rotation.
+ * @property {Function} jumpTo - Jump to specific text index.
+ * @property {Function} reset - Reset rotation to first text.
+ * 
+ * @returns {JSX.Element} Animated rotating text component.
+ */
 const RotatingText = forwardRef((props, ref) => {
   const {
     texts,
@@ -31,6 +80,7 @@ const RotatingText = forwardRef((props, ref) => {
 
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
 
+  // Split string into grapheme clusters (handles emojis, diacritics, etc.)
   const splitIntoCharacters = text => {
     if (typeof Intl !== 'undefined' && Intl.Segmenter) {
       const segmenter = new Intl.Segmenter('en', { granularity: 'grapheme' });
@@ -39,6 +89,7 @@ const RotatingText = forwardRef((props, ref) => {
     return Array.from(text);
   };
 
+  // Build split structure for words/lines/characters
   const elements = useMemo(() => {
     const currentText = texts[currentTextIndex];
     if (splitBy === 'characters') {
@@ -60,13 +111,13 @@ const RotatingText = forwardRef((props, ref) => {
         needsSpace: i !== arr.length - 1
       }));
     }
-
     return currentText.split(splitBy).map((part, i, arr) => ({
       characters: [part],
       needsSpace: i !== arr.length - 1
     }));
   }, [texts, currentTextIndex, splitBy]);
 
+  // Calculate delay for stagger animation
   const getStaggerDelay = useCallback(
     (index, totalChars) => {
       const total = totalChars;
@@ -85,6 +136,7 @@ const RotatingText = forwardRef((props, ref) => {
     [staggerFrom, staggerDuration]
   );
 
+  // Handle index change and trigger callback
   const handleIndexChange = useCallback(
     newIndex => {
       setCurrentTextIndex(newIndex);
@@ -93,47 +145,33 @@ const RotatingText = forwardRef((props, ref) => {
     [onNext]
   );
 
+  // Controls for manual rotation
   const next = useCallback(() => {
     const nextIndex = currentTextIndex === texts.length - 1 ? (loop ? 0 : currentTextIndex) : currentTextIndex + 1;
-    if (nextIndex !== currentTextIndex) {
-      handleIndexChange(nextIndex);
-    }
+    if (nextIndex !== currentTextIndex) handleIndexChange(nextIndex);
   }, [currentTextIndex, texts.length, loop, handleIndexChange]);
 
   const previous = useCallback(() => {
     const prevIndex = currentTextIndex === 0 ? (loop ? texts.length - 1 : currentTextIndex) : currentTextIndex - 1;
-    if (prevIndex !== currentTextIndex) {
-      handleIndexChange(prevIndex);
-    }
+    if (prevIndex !== currentTextIndex) handleIndexChange(prevIndex);
   }, [currentTextIndex, texts.length, loop, handleIndexChange]);
 
   const jumpTo = useCallback(
     index => {
       const validIndex = Math.max(0, Math.min(index, texts.length - 1));
-      if (validIndex !== currentTextIndex) {
-        handleIndexChange(validIndex);
-      }
+      if (validIndex !== currentTextIndex) handleIndexChange(validIndex);
     },
     [texts.length, currentTextIndex, handleIndexChange]
   );
 
   const reset = useCallback(() => {
-    if (currentTextIndex !== 0) {
-      handleIndexChange(0);
-    }
+    if (currentTextIndex !== 0) handleIndexChange(0);
   }, [currentTextIndex, handleIndexChange]);
 
-  useImperativeHandle(
-    ref,
-    () => ({
-      next,
-      previous,
-      jumpTo,
-      reset
-    }),
-    [next, previous, jumpTo, reset]
-  );
+  // Expose control functions through ref
+  useImperativeHandle(ref, () => ({ next, previous, jumpTo, reset }), [next, previous, jumpTo, reset]);
 
+  // Auto rotation interval
   useEffect(() => {
     if (!auto) return;
     const intervalId = setInterval(next, rotationInterval);

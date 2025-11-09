@@ -1,15 +1,18 @@
 import { useEffect, useRef } from 'react';
 import { Renderer, Camera, Geometry, Program, Mesh } from 'ogl';
 
+/** Default fallback colors */
 const defaultColors = ['#ffffff', '#ffffff', '#ffffff'];
 
-const hexToRgb = hex => {
+/**
+ * Converts a hex color string (e.g. "#ff00aa") to normalized RGB [0–1].
+ * @param {string} hex - Hex color value.
+ * @returns {number[]} Normalized RGB array [r, g, b].
+ */
+const hexToRgb = (hex) => {
   hex = hex.replace(/^#/, '');
   if (hex.length === 3) {
-    hex = hex
-      .split('')
-      .map(c => c + c)
-      .join('');
+    hex = hex.split('').map((c) => c + c).join('');
   }
   const int = parseInt(hex, 16);
   const r = ((int >> 16) & 255) / 255;
@@ -18,11 +21,12 @@ const hexToRgb = hex => {
   return [r, g, b];
 };
 
+/** GLSL vertex shader */
 const vertex = /* glsl */ `
   attribute vec3 position;
   attribute vec4 random;
   attribute vec3 color;
-  
+
   uniform mat4 modelMatrix;
   uniform mat4 viewMatrix;
   uniform mat4 projectionMatrix;
@@ -30,23 +34,23 @@ const vertex = /* glsl */ `
   uniform float uSpread;
   uniform float uBaseSize;
   uniform float uSizeRandomness;
-  
+
   varying vec4 vRandom;
   varying vec3 vColor;
-  
+
   void main() {
     vRandom = random;
     vColor = color;
-    
+
     vec3 pos = position * uSpread;
     pos.z *= 10.0;
-    
+
     vec4 mPos = modelMatrix * vec4(pos, 1.0);
     float t = uTime;
     mPos.x += sin(t * random.z + 6.28 * random.w) * mix(0.1, 1.5, random.x);
     mPos.y += sin(t * random.y + 6.28 * random.x) * mix(0.1, 1.5, random.w);
     mPos.z += sin(t * random.w + 6.28 * random.y) * mix(0.1, 1.5, random.z);
-    
+
     vec4 mvPos = viewMatrix * mPos;
 
     if (uSizeRandomness == 0.0) {
@@ -59,22 +63,21 @@ const vertex = /* glsl */ `
   }
 `;
 
+/** GLSL fragment shader */
 const fragment = /* glsl */ `
   precision highp float;
-  
+
   uniform float uTime;
   uniform float uAlphaParticles;
   varying vec4 vRandom;
   varying vec3 vColor;
-  
+
   void main() {
     vec2 uv = gl_PointCoord.xy;
     float d = length(uv - vec2(0.5));
-    
-    if(uAlphaParticles < 0.5) {
-      if(d > 0.5) {
-        discard;
-      }
+
+    if (uAlphaParticles < 0.5) {
+      if (d > 0.5) discard;
       gl_FragColor = vec4(vColor + 0.2 * sin(uv.yxx + uTime + vRandom.y * 6.28), 1.0);
     } else {
       float circle = smoothstep(0.5, 0.4, d) * 0.8;
@@ -83,6 +86,39 @@ const fragment = /* glsl */ `
   }
 `;
 
+/**
+ * Particles Component (OG-L powered)
+ *
+ * Creates a GPU-accelerated animated particle field using WebGL via OGL.
+ * Includes options for hover interaction, motion speed, color palettes,
+ * and alpha blending for soft particle appearance.
+ *
+ * @component
+ * @param {object} props - Component properties.
+ * @param {number} [props.particleCount=200] - Number of particles.
+ * @param {number} [props.particleSpread=10] - Spread radius of particle distribution.
+ * @param {number} [props.speed=0.1] - Global animation speed factor.
+ * @param {string[]} [props.particleColors] - Array of color hex strings for particles.
+ * @param {boolean} [props.moveParticlesOnHover=false] - Enables particle movement based on mouse position.
+ * @param {number} [props.particleHoverFactor=1] - Strength of particle motion when hovered.
+ * @param {boolean} [props.alphaParticles=false] - Enables smooth alpha edges instead of hard circles.
+ * @param {number} [props.particleBaseSize=100] - Base particle size in pixels.
+ * @param {number} [props.sizeRandomness=1] - Randomness applied to particle size variation.
+ * @param {number} [props.cameraDistance=20] - Distance of the camera from particle field.
+ * @param {boolean} [props.disableRotation=false] - Disables automatic particle rotation.
+ * @param {string} [props.className] - Optional Tailwind or custom class names.
+ *
+ * @example
+ * <Particles
+ *   particleCount={300}
+ *   particleColors={['#ff66cc', '#66ccff', '#ffffff']}
+ *   moveParticlesOnHover
+ *   particleHoverFactor={1.5}
+ *   alphaParticles
+ *   cameraDistance={25}
+ *   speed={0.2}
+ * />
+ */
 const Particles = ({
   particleCount = 200,
   particleSpread = 10,
@@ -104,14 +140,17 @@ const Particles = ({
     const container = containerRef.current;
     if (!container) return;
 
+    // Initialize OGL renderer
     const renderer = new Renderer({ depth: false, alpha: true });
     const gl = renderer.gl;
     container.appendChild(gl.canvas);
     gl.clearColor(0, 0, 0, 0);
 
+    // Camera setup
     const camera = new Camera(gl, { fov: 15 });
     camera.position.set(0, 0, cameraDistance);
 
+    // Handle viewport resize
     const resize = () => {
       const width = container.clientWidth;
       const height = container.clientHeight;
@@ -121,7 +160,8 @@ const Particles = ({
     window.addEventListener('resize', resize, false);
     resize();
 
-    const handleMouseMove = e => {
+    // Mouse movement tracking
+    const handleMouseMove = (e) => {
       const rect = container.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
@@ -132,11 +172,12 @@ const Particles = ({
       container.addEventListener('mousemove', handleMouseMove);
     }
 
+    // Generate particle attributes
     const count = particleCount;
     const positions = new Float32Array(count * 3);
     const randoms = new Float32Array(count * 4);
     const colors = new Float32Array(count * 3);
-    const palette = particleColors && particleColors.length > 0 ? particleColors : defaultColors;
+    const palette = particleColors?.length ? particleColors : defaultColors;
 
     for (let i = 0; i < count; i++) {
       let x, y, z, len;
@@ -153,6 +194,7 @@ const Particles = ({
       colors.set(col, i * 3);
     }
 
+    // Create geometry, shader program, and mesh
     const geometry = new Geometry(gl, {
       position: { size: 3, data: positions },
       random: { size: 4, data: randoms },
@@ -175,11 +217,12 @@ const Particles = ({
 
     const particles = new Mesh(gl, { mode: gl.POINTS, geometry, program });
 
+    // Animation loop
     let animationFrameId;
     let lastTime = performance.now();
     let elapsed = 0;
 
-    const update = t => {
+    const update = (t) => {
       animationFrameId = requestAnimationFrame(update);
       const delta = t - lastTime;
       lastTime = t;
@@ -187,6 +230,7 @@ const Particles = ({
 
       program.uniforms.uTime.value = elapsed * 0.001;
 
+      // Hover motion control
       if (moveParticlesOnHover) {
         particles.position.x = -mouseRef.current.x * particleHoverFactor;
         particles.position.y = -mouseRef.current.y * particleHoverFactor;
@@ -195,6 +239,7 @@ const Particles = ({
         particles.position.y = 0;
       }
 
+      // Optional rotation
       if (!disableRotation) {
         particles.rotation.x = Math.sin(elapsed * 0.0002) * 0.1;
         particles.rotation.y = Math.cos(elapsed * 0.0005) * 0.15;
@@ -206,17 +251,13 @@ const Particles = ({
 
     animationFrameId = requestAnimationFrame(update);
 
+    // Cleanup
     return () => {
       window.removeEventListener('resize', resize);
-      if (moveParticlesOnHover) {
-        container.removeEventListener('mousemove', handleMouseMove);
-      }
+      if (moveParticlesOnHover) container.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
-      if (container.contains(gl.canvas)) {
-        container.removeChild(gl.canvas);
-      }
+      if (container.contains(gl.canvas)) container.removeChild(gl.canvas);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     particleCount,
     particleSpread,

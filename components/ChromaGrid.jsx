@@ -1,20 +1,57 @@
+/**
+ * ChromaGrid.jsx
+ *
+ * Interactive animated grid with gradient cards and mouse-driven lighting effects.
+ * Features smooth GSAP spotlight animation, grayscale overlay masks, and responsive layout.
+ */
+
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 
-const ChromaGrid = ({
+/**
+ * @component ChromaGrid
+ * @description
+ * Displays a responsive animated card grid with chromatic gradients and
+ * dynamic mouse-based lighting. Includes grayscale and fade overlay masks
+ * that smoothly follow the cursor and maintain rounded corners.
+ *
+ * @param {Object[]} [items] - Array of card data objects.
+ * @param {string} [className] - Optional additional classes for the grid container.
+ * @param {number} [radius=220] - Spotlight radius (in px).
+ * @param {number} [damping=0.45] - Smoothness factor for spotlight motion.
+ * @param {number} [fadeOut=0.6] - Fade duration (seconds) when leaving the grid area.
+ * @param {string} [ease='power3.out'] - GSAP easing type for the spotlight animation.
+ *
+ * @example
+ * <ChromaGrid
+ *   items={[
+ *     {
+ *       image: 'https://i.pravatar.cc/300?img=5',
+ *       title: 'Jane Doe',
+ *       subtitle: 'UI Designer',
+ *       handle: '@janedoe',
+ *       borderColor: '#ff6bcb',
+ *       gradient: 'linear-gradient(145deg, #ff6bcb, #000)',
+ *       url: 'https://github.com/janedoe'
+ *     }
+ *   ]}
+ * />
+ */
+export default function ChromaGrid({
   items,
   className = '',
   radius = 220,
   damping = 0.45,
   fadeOut = 0.6,
   ease = 'power3.out'
-}) => {
+}) {
   const rootRef = useRef(null);
   const fadeRef = useRef(null);
   const setX = useRef(null);
   const setY = useRef(null);
   const pos = useRef({ x: 0, y: 0 });
 
+  // Demo fallback data
   const demo = [
     {
       image: 'https://i.pravatar.cc/300?img=8',
@@ -24,22 +61,25 @@ const ChromaGrid = ({
       borderColor: '#559b70ff',
       gradient: 'linear-gradient(145deg, #4F46E5, #000)',
       url: 'https://github.com/'
-    },
+    }
   ];
-
   const data = items?.length ? items : demo;
 
+  // Initialize spotlight position at the center
   useEffect(() => {
     const el = rootRef.current;
     if (!el) return;
+
     setX.current = gsap.quickSetter(el, '--x', 'px');
     setY.current = gsap.quickSetter(el, '--y', 'px');
+
     const { width, height } = el.getBoundingClientRect();
     pos.current = { x: width / 2, y: height / 2 };
     setX.current(pos.current.x);
     setY.current(pos.current.y);
   }, []);
 
+  /** Move the spotlight to the specified coordinates */
   const moveTo = (x, y) => {
     gsap.to(pos.current, {
       x,
@@ -54,25 +94,25 @@ const ChromaGrid = ({
     });
   };
 
-  const handleMove = e => {
+  /** Triggered on pointer move inside the grid */
+  const handleMove = (e) => {
     const r = rootRef.current.getBoundingClientRect();
     moveTo(e.clientX - r.left, e.clientY - r.top);
     gsap.to(fadeRef.current, { opacity: 0, duration: 0.25, overwrite: true });
   };
 
+  /** Triggered when pointer leaves the grid */
   const handleLeave = () => {
-    gsap.to(fadeRef.current, {
-      opacity: 1,
-      duration: fadeOut,
-      overwrite: true
-    });
+    gsap.to(fadeRef.current, { opacity: 1, duration: fadeOut, overwrite: true });
   };
 
-  const handleCardClick = url => {
+  /** Open card URL in new tab */
+  const handleCardClick = (url) => {
     if (url) window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const handleCardMove = e => {
+  /** Update relative cursor position for per-card spotlight effect */
+  const handleCardMove = (e) => {
     const c = e.currentTarget;
     const rect = c.getBoundingClientRect();
     c.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
@@ -91,6 +131,7 @@ const ChromaGrid = ({
         '--y': '50%'
       }}
     >
+      {/* === Cards === */}
       {data.map((c, i) => (
         <article
           key={i}
@@ -103,7 +144,7 @@ const ChromaGrid = ({
             '--spotlight-color': 'rgba(255,255,255,0.3)'
           }}
         >
-          {/* Spotlight hover */}
+          {/* Spotlight hover layer */}
           <div
             className="absolute inset-0 opacity-0 transition-opacity duration-500 pointer-events-none z-10 hover:opacity-100"
             style={{
@@ -122,7 +163,7 @@ const ChromaGrid = ({
             />
           </div>
 
-          {/* Info */}
+          {/* Footer content */}
           <footer className="relative z-20 w-full p-4 text-center text-white backdrop-blur-md bg-black/45 border-t border-white/10 flex flex-col items-center gap-1 rounded-b-[14px] transition-all duration-300 hover:bg-black/65">
             <h3 className="text-[1.45rem] font-bold m-0 tracking-[0.5px]">{c.title}</h3>
             {c.handle && (
@@ -137,11 +178,13 @@ const ChromaGrid = ({
         </article>
       ))}
 
+      {/* === Overlay masks === */}
       <div className="absolute inset-0 rounded-[20px] overflow-hidden pointer-events-none">
-        {/* Overlay mask */}
+        {/* Grayscale overlay */}
         <div
           className="absolute inset-0 pointer-events-none z-30"
           style={{
+            borderRadius: '20px',
             backdropFilter: 'grayscale(1) brightness(0.78)',
             WebkitBackdropFilter: 'grayscale(1) brightness(0.78)',
             background: 'rgba(0,0,0,0.001)',
@@ -157,6 +200,7 @@ const ChromaGrid = ({
           ref={fadeRef}
           className="absolute inset-0 pointer-events-none z-40 transition-opacity duration-200"
           style={{
+            borderRadius: '20px',
             backdropFilter: 'grayscale(1) brightness(0.78)',
             WebkitBackdropFilter: 'grayscale(1) brightness(0.78)',
             background: 'rgba(0,0,0,0.001)',
@@ -170,6 +214,4 @@ const ChromaGrid = ({
       </div>
     </div>
   );
-};
-
-export default ChromaGrid;
+}
