@@ -20,7 +20,7 @@
   margin: 0;
   position: relative;
   z-index: 3;
-  color: white;
+  color: var(--whitetext);
   text-shadow: 0 1px 1px #0b1220;
   align-items: center;
   justify-content: center;
@@ -33,7 +33,7 @@
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 0 0.5px 1.5px transparent;
-  color: white;
+  color: var(--whitetext);
   font-size: 1rem;
   text-align: center;
 }
@@ -76,7 +76,7 @@
   position: absolute;
   inset: 0;
   border-radius: 10px;
-  background: white;
+  background: var(--whitetext);
   opacity: 0;
   transform: scale(0);
   transition: all 0.3s ease;
@@ -84,7 +84,7 @@
 }
 
 .gooey-nav-container nav ul li.active {
-  color: black;
+  color: var(--blacktext);
   text-shadow: none;
 }
 
@@ -108,12 +108,12 @@
 }
 
 .gooey-nav-container .effect.text {
-  color: white;
+  color: var(--whitetext);
   transition: color 0.3s ease;
 }
 
 .gooey-nav-container .effect.text.active {
-  color: black;
+  color: var(--blacktext);
 }
 
 .gooey-nav-container .effect.filter {
@@ -125,7 +125,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: white;
+  background: var(--whitetext);
   transform: scale(0);
   opacity: 0;
   z-index: -1;
@@ -166,10 +166,6 @@
   background: var(--color);
   opacity: 1;
   animation: point var(--time) ease 1 -350ms;
-}
-
-.effect filter {
-  
 }
 
 @keyframes particle {

@@ -29,7 +29,7 @@ export default function NavBar() {
         className={`fixed top-0 left-0 w-full transition-all duration-500 ${
           isScrolled
             ? "bg-[#0b1220cc] backdrop-blur-md shadow-sm"
-            : "bg-[#0f0f2b] shadow-md"
+            : "bg-[var(--background)] shadow-md"
         } z-40`}
       >
       <div className="flex items-center justify-between max-w-[85rem] mx-auto px-4 md:px-12 py-4 md:py-6">
@@ -48,13 +48,6 @@ export default function NavBar() {
           <div className="scale-90 sm:scale-95 md:scale-100 min-w-[200px]">
             <GooeyNav
               items={items}
-              particleCount={15}
-              particleDistances={[90, 10]}
-              particleR={100}
-              initialActiveIndex={0}
-              animationTime={600}
-              timeVariance={300}
-              colors={[1, 2, 3, 1, 2, 3, 1, 4]}
             />
           </div>
         </div>
