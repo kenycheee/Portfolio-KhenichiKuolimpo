@@ -10,8 +10,7 @@ export default function Profile() {
       title: "Khenichi Kuolimpo",
       subtitle: "Untarian '23 • Projects 2+",
       handle: "Information Technology",
-      borderColor: "#60A5FA",
-      gradient: "linear-gradient(145deg, rgba(96,165,250,0.4), rgba(17,24,39,0.9))",
+      gradient: "linear-gradient(145deg, rgba(72, 62, 255, 0.4), var(--main))",
     },
   ];
 
@@ -27,7 +26,7 @@ export default function Profile() {
               "Video Editing",
               "Database",
             ]}
-            mainClassName="text-black bg-white text-2xl sm:text-4xl md:text-5xl font-semibold tracking-wide overflow-hidden drop-shadow-[0_0_10px_rgba(255,255,255,0.15)] border-2 border-black/25 px-4 py-2 rounded-lg"
+            mainClassName="text-[var(--blacktext)] bg-[var(--background)] text-2xl sm:text-4xl md:text-5xl font-semibold tracking-wide overflow-hidden drop-shadow-[var(--dropshadow)] border-2 border-[var(--bordergrey)] px-4 py-2 rounded-lg"
             staggerFrom={"first"}
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
@@ -39,7 +38,7 @@ export default function Profile() {
           />
         </div>
 
-        <div className="relative origin-left -mt-3">
+        <div className="relative origin-left -mt-3 text-[var(--blacktext)] bg-[var(--background)]">
           <p className="-mr-30 pl-1">
             Information Technology Student • Passionate • Fast and Eager to learn • Adaptable • Proactive
           </p>

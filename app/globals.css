@@ -2,7 +2,11 @@
 @import "tw-animate-css";
 
 :root {
-  --background: #0f0f2b;
+  --main: #0f0f2b;
+  --background: #ffffff;
+
+  --bordergrey: #c8c8c8;
+  --dropshadow: #3a3a3a;
   
   --whitetext: #f0f0f0;
   --blacktext: #121212;
