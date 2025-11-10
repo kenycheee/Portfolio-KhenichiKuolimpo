@@ -52,7 +52,7 @@ export default function GradientText({
     <div className={`relative inline-block ${className}`}>
       {/* Animated gradient text */}
       <span
-        className="text-transparent bg-cover animate-gradient"
+        className="text-transparent bg-cover animate-gradient relative z-20"
         style={{
           ...gradientStyle,
           backgroundClip: 'text',
