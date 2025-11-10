@@ -149,7 +149,7 @@ export default function Profile() {
       </div>
 
       {/* KANAN - FOTO */}
-      <div className="flex justify-center md:justify-end md:w-1/2 bg-gradient-to-r from-[#121212] via-[#6366f1] to-[#121212] rounded-2xl p-4">
+      <div className="flex justify-center md:justify-end md:w-1/2 bg-black rounded-2xl p-4">
           <ChromaGrid
             items={items}
             radius={260}
