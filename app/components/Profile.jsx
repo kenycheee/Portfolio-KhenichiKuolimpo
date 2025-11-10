@@ -12,7 +12,7 @@ export default function Profile() {
       title: "Khenichi Kuolimpo",
       subtitle: "Untarian '23 • Projects 2+",
       handle: "Information Technology",
-      gradient: "linear-gradient(145deg, rgba(72, 62, 255, 0.4), var(--main))",
+      gradient: "linear-gradient(to right, #0f172a, #38bdf8, #1e3a8a)",
     },
   ];
 
@@ -97,38 +97,50 @@ export default function Profile() {
 
         {/* Tombol GlareHover */}
         <div className="flex flex-wrap mt-10 gap-5">
-          <GlareHover glareColor="#ffffff" glareOpacity={0.4}>
+          <GlareHover glareColor="#ffffff" glareOpacity={0.7}>
             <a
               href="/Khenichi Kuolimpo Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="px-6 py-2 border border-black bg-black text-white rounded-lg font-semibold hover:opacity-90 transition-all duration-300">
+              <button className="px-6 py-2 border-[1.5px] border-black bg-gradient-to-r from-[#052e16] via-[#10b981] to-[#052e16] text-white rounded-lg font-semibold">
                 View CV
               </button>
             </a>
           </GlareHover>
           
-          <GlareHover glareColor="#ffffff" glareOpacity={0.4}>
+          <GlareHover glareColor="#ffffff" glareOpacity={0.7}>
             <a
               href="https://www.instagram.com/khenichi.k/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="px-6 py-2 border-1 border-black bg-gradient-to-r from-[#feda75] via-[#d62976] to-[#962fbf] text-white rounded-lg font-semibold">
+              <button className="px-6 py-2 border-[1.5px] border-black bg-gradient-to-r from-[#feda75] via-[#d62976] to-[#962fbf] text-white rounded-lg font-semibold">
                 Instagram
               </button>
             </a>
           </GlareHover>
 
-          <GlareHover glareColor="#ffffff" glareOpacity={0.4}>
+          <GlareHover glareColor="#ffffff" glareOpacity={0.7}>
             <a
               href="https://www.linkedin.com/in/khenichi-kuolimpo-19067838a/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="px-6 py-2 border-1 border-black bg-[#2dd4bf] text-white rounded-lg font-semibold">
+              <button className="px-6 py-2 border-[1.5px] border-black bg-gradient-to-r from-[#0f766e] via-[#14b8a6] to-[#a7f3d0] text-white rounded-lg font-semibold">
                 LinkedIn
+              </button>
+            </a>
+          </GlareHover>
+
+          <GlareHover glareColor="#ffffff" glareOpacity={0.7}>
+            <a
+              href="https://github.com/kenycheee"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="px-6 py-2 border-[1.5px] border-black bg-gradient-to-r from-[#0f172a] via-[#1e40af] to-[#0f172a] text-white rounded-lg font-semibold">
+                GitHub
               </button>
             </a>
           </GlareHover>
@@ -137,14 +149,14 @@ export default function Profile() {
       </div>
 
       {/* KANAN - FOTO */}
-      <div className="flex justify-center md:justify-end md:w-1/2">
-        <ChromaGrid
-          items={items}
-          radius={260}
-          damping={0.5}
-          fadeOut={0.5}
-          ease="power3.out"
-        />
+      <div className="flex justify-center md:justify-end md:w-1/2 bg-gradient-to-r from-[#121212] via-[#6366f1] to-[#121212] rounded-2xl p-4">
+          <ChromaGrid
+            items={items}
+            radius={260}
+            damping={0.5}
+            fadeOut={0.5}
+            ease="power3.out"
+          />
       </div>
     </section>
   );

@@ -59,7 +59,7 @@ export default function ChromaGrid({
       subtitle: 'Full Stack Developer',
       handle: '@alexrivera',
       borderColor: '#559b70ff',
-      gradient: 'linear-gradient(145deg, #4F46E5, #000)',
+      gradient: 'linear-gradient(#145deg, #6259ff, #000)',
       url: 'https://github.com/'
     }
   ];
