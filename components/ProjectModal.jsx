@@ -3,13 +3,13 @@
  * This file defines the `ProjectsModal` component.
  * It displays a horizontally scrollable gallery of project cards, each containing
  * a preview image, short description, technology tags, and external links.
- * Users can click “Detail” to open a modal containing a detailed description
- * and image carousel for the selected project.
+ * Users can click a project thumbnail to open a modal with more details
+ * and an image carousel.
  *
  * Features:
  * - Smooth horizontal scroll with responsive design.
  * - Modal viewer with navigable image carousel.
- * - Auto-hiding navbar when the modal is open.
+ * - Navbar hides automatically when the modal is open.
  *
  * Built with Next.js, React hooks, Tailwind CSS, and Next/Image optimization.
  */
@@ -22,9 +22,9 @@ import Image from 'next/image';
 /**
  * The `ProjectsModal` component renders a portfolio showcase.
  *
- * Each project card presents a thumbnail, description, and tech tags.
- * Selecting a card’s “Detail” button opens a modal displaying more
- * detailed project information and a swipeable image gallery.
+ * Each project card presents a thumbnail, short description, and tech tags.
+ * Clicking the thumbnail opens a modal displaying detailed project info and
+ * a navigable image carousel.
  *
  * @returns {JSX.Element} A section containing the scrollable project list and modal viewer.
  */
@@ -46,7 +46,7 @@ export default function ProjectsModal() {
   const projects = [
     {
       title: 'Go-Badminton!',
-      desc: `Go-Badminton! is a modern web platform for badminton enthusiasts that makes booking and managing courts effortless. With a clean and intuitive interface, users can view real-time schedules, check court availability, and make instant reservations with ease. It also features a complete internationalization (i18n) system, allowing users to seamlessly switch between Indonesian (ID) and English (EN) for a more inclusive and accessible experience.`,
+      desc: `A modern web platform for badminton enthusiasts to easily book courts, manage schedules, and switch between Indonesian and English.`,
       detail: `Go-Badminton! makes it easy for players to reserve courts, check availability, and manage their game schedules effortlessly. With real-time updates, responsive design, and a built-in internationalization (i18n) system, users can switch between Indonesian (ID) and English (EN) seamlessly, ensuring a smooth experience for everyone.`,
       thumb: '/Assets/GB2.png',
       images: ['/Assets/GB1.png', '/Assets/GB2.png', '/Assets/GB3.png', '/Assets/GB4.png'],
@@ -54,8 +54,8 @@ export default function ProjectsModal() {
       repo: 'https://github.com/BoviliusMeidi/go-badminton',
     },
     {
-      title: 'Song Extractor - Classical Music Sharing and Sheet Viewer App',
-      desc: `Song Extractor is a music-focused application designed for classical music enthusiasts. It allows users to browse, view, and share music sheets while also enabling them to post their own compositions or performances. The app combines a clean, elegant interface with features that support musicians in studying, practicing, and connecting through classical music content.`,
+      title: 'Song Extractor',
+      desc: `A clean, elegant app for exploring, viewing, and sharing classical music sheets and performances.`,
       detail: `Song Extractor is a classical music application that allows users to view digital music sheets, explore classical compositions, and share their own performances or posts. The app is designed with a clean and elegant interface to make discovering and studying classical music both accessible and inspiring.`,
       thumb: '/Assets/SE1.jpg',
       images: [
@@ -73,7 +73,7 @@ export default function ProjectsModal() {
     },
     {
       title: 'PT. Hanica Sukses Makmur',
-      desc: `This application is built to record and monitor the company’s production and stock activities in real time. It tracks the quantities of raw materials, roll fiber, plastic cups, and recycled products, ensuring transparent and efficient inventory management. The system also includes automated error-rate analysis between production stages to help reduce material waste and improve operational accuracy.`,
+      desc: `A desktop system for monitoring production, stock, and error analysis in a plastic manufacturing company.`,
       detail: `This application is designed to record and monitor the stock of raw materials, roll fiber, plastic cups, and recycled products in real-time. The system also automatically calculates error rates between production processes, helping to minimize mistakes and improve material management efficiency.`,
       thumb: '/Assets/Project2.png',
       images: [
@@ -89,8 +89,8 @@ export default function ProjectsModal() {
     },
     {
       title: 'PakanMoo',
-      desc: `PakanMoo is a mobile application concept designed to help farmers efficiently manage cattle feeding and nutrition schedules. It simplifies the process of tracking feed portions, feeding times, and livestock health through an intuitive and visually engaging interface. The UI/UX design emphasizes clarity, warmth, and accessibility — combining friendly farm-inspired visuals with functional layouts to make daily management tasks easier and more enjoyable for users.`,
-      detail: `PakanMoo is a UI/UX design project for a mobile application that helps farmers efficiently manage cattle feeding schedules. The interface emphasizes simplicity and friendly visuals, featuring farm-themed elements such as barns, fences, and cows to create an engaging user experience. The design focuses on clarity and usability, making it easy for users to monitor feed portions, feeding times, and livestock conditions.`,
+      desc: `A friendly mobile UI design to help farmers manage cattle feeding schedules with ease.`,
+      detail: `PakanMoo is a UI/UX design project for a mobile application that helps farmers efficiently manage cattle feeding schedules. The interface emphasizes simplicity and friendly visuals, featuring farm-themed elements such as barns, fences, and cows to create an engaging user experience.`,
       thumb: '/Assets/Pakanmoo.png',
       images: [
         '/Assets/Pakanmoo.png',
@@ -123,7 +123,7 @@ export default function ProjectsModal() {
 
   return (
     <section className="flex flex-col bg-white text-gray-900">
-      <div className="px-0 md:px-0 lg:px-0">
+      <div className="px-0">
         <div
           ref={scrollRef}
           className="w-full overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent"
@@ -136,7 +136,10 @@ export default function ProjectsModal() {
                 className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl w-[350px] h-auto flex flex-col justify-between transition-transform hover:scale-[1.03] border border-gray-200"
               >
                 <div>
-                  <div className="overflow-hidden border border-gray-300 rounded-xl mb-4">
+                  <div
+                    className="overflow-hidden border border-gray-300 rounded-xl mb-4 cursor-pointer"
+                    onClick={() => openModal(project)}
+                  >
                     <Image
                       src={project.thumb}
                       alt={project.title}
@@ -147,7 +150,7 @@ export default function ProjectsModal() {
                   </div>
 
                   <h4 className="text-lg font-semibold mb-2">{project.title}</h4>
-                  <p className="text-sm text-gray-600">{project.desc}</p>
+                  <p className="text-sm text-gray-600 line-clamp-3">{project.desc}</p>
 
                   <div className="flex flex-wrap gap-2 mt-4">
                     {project.tags.map((tag, i) => (
@@ -161,21 +164,13 @@ export default function ProjectsModal() {
                   </div>
                 </div>
 
-                <div className="flex gap-3 mt-6 justify-end">
+                <div className="flex justify-end mt-6">
                   <button
-                    onClick={() => openModal(project)}
+                    onClick={() => window.open(activeProject.repo)}
                     className="px-4 py-2 border border-cyan-500 text-cyan-600 rounded-md hover:bg-cyan-50 transition"
                   >
                     Detail
                   </button>
-                  <a
-                    href={project.repo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 bg-cyan-500 text-white rounded-md hover:bg-cyan-400 transition"
-                  >
-                    View
-                  </a>
                 </div>
               </article>
             ))}
@@ -185,7 +180,7 @@ export default function ProjectsModal() {
 
       {isOpen && activeProject && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white text-gray-900 p-8 rounded-2xl relative w-[90%] max-w-4xl shadow-2xl max-h-[90vh] overflow-y-auto">
+          <div className="bg-white text-gray-900 p-8 rounded-2xl relative w-[90%] max-w-4xl shadow-2xl max-h-[95vh] overflow-y-auto">
             <button
               onClick={closeModal}
               className="absolute top-4 right-4 text-xl text-gray-500 hover:text-black"
@@ -219,7 +214,20 @@ export default function ProjectsModal() {
               </button>
             </div>
 
-            <p className="text-gray-700 whitespace-pre-line">{activeProject.detail}</p>
+            <p className="text-gray-700 whitespace-pre-line mb-6">
+              {activeProject.detail}
+            </p>
+
+            <div className="flex justify-center">
+              <a
+                href={activeProject.repo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-2 bg-cyan-500 text-white rounded-md hover:bg-cyan-400 transition"
+              >
+                View Project
+              </a>
+            </div>
           </div>
         </div>
       )}

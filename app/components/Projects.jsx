@@ -2,7 +2,6 @@
 
 import ProjectsModal from "../../components/ProjectModal";
 import AnimatedContent from "../../components/AnimatedContent";
-import Shuffle from "../../components/Shuffle";
 
 export default function Projects() {
   return (
@@ -16,28 +15,17 @@ export default function Projects() {
       animateOpacity
       scale={1}
       threshold={0.1}
-      delay={0.5}
+      delay={0}
+      triggerOnce={false}
     >
       <section className="w-full text-center space-y-6">
         {/* Judul pakai Shuffle auto jalan */}
-        <Shuffle
-          text="Featured Projects"
-          shuffleDirection="right"
-          duration={0.4}
-          animationMode="evenodd"
-          shuffleTimes={1}
-          ease="power3.out"
-          stagger={0.05}
-          threshold={0.1}
-          triggerOnce={false}
-          triggerOnHover={false}
-          respectReducedMotion={false}
-          autoStart={true}
-          className="text-4xl md:text-5xl font-bold text-black"
-        />
+        <div className="text-4xl md:text-5xl font-bold text-black">
+            Featured Projects
+        </div>
 
         {/* Modal daftar project */}
-        <div className="text-left mt-8">
+        <div className="text-left mt-20">
           <ProjectsModal />
         </div>
       </section>

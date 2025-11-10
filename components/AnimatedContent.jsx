@@ -16,6 +16,7 @@ const AnimatedContent = ({
   scale = 1,
   threshold = 0.1,
   delay = 0,
+  triggerOnce = true,
   onComplete
 }) => {
   const ref = useRef(null);
@@ -34,7 +35,7 @@ const AnimatedContent = ({
       opacity: animateOpacity ? initialOpacity : 1
     });
 
-    gsap.to(el, {
+    const tween = gsap.to(el, {
       [axis]: 0,
       scale: 1,
       opacity: 1,
@@ -45,14 +46,16 @@ const AnimatedContent = ({
       scrollTrigger: {
         trigger: el,
         start: `top ${startPct}%`,
-        toggleActions: 'play none none none',
-        once: true
-      }
+        toggleActions: triggerOnce
+          ? 'play none none none'
+          : 'play reverse play reverse', // biar kalau triggerOnce false, dia bisa muncul-hilang
+        once: triggerOnce,
+      },
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
-      gsap.killTweensOf(el);
+      tween.scrollTrigger?.kill();
+      tween.kill();
     };
   }, [
     distance,
@@ -65,6 +68,7 @@ const AnimatedContent = ({
     scale,
     threshold,
     delay,
+    triggerOnce,
     onComplete
   ]);
 
