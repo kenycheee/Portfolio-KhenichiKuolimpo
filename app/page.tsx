@@ -1,13 +1,19 @@
 'use client';
 
 import Profile from "./components/Profile";
+import Projects from "./components/Projects";
 
 export default function Home() {
   return (
-    <main>
-      <div className="min-h-screen flex items-center justify-center mt-15">
+    <main className="min-h-screen flex flex-col items-center justify-center gap-20 py-20">
+
+      <section className="w-full flex justify-center">
         <Profile />
-      </div>
+      </section>
+
+      <section className="w-full flex justify-center">
+        <Projects />
+      </section>
     </main>
   );
 }
