@@ -48,21 +48,23 @@ export default function NavBar() {
 
   return (
     <div
-      className={`fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-[99] rounded-xl transition-all duration-500 ${
+      className={`pointer-events-none fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-[99] rounded-xl transition-all duration-500 ${
         scrolled
           ? 'top-[0.4em] md:top-[0.8em] backdrop-blur-xl bg-white/70 shadow-[0_0_25px_rgba(0,0,0,0.15)] scale-[0.98]'
           : 'top-[1.2em] md:top-[2em] backdrop-blur-md bg-white/80 shadow-[0_0_20px_rgba(0,0,0,0.1)] scale-100'
       }`}
     >
-      <CardNav
-        logoAlt="Company Logo"
-        items={items}
-        baseColor="#fff"
-        menuColor="#000"
-        buttonBgColor="#111"
-        buttonTextColor="#fff"
-        ease="back.out(1.7)"
-      />
+      <div className="pointer-events-auto">
+        <CardNav
+          logoAlt="Company Logo"
+          items={items}
+          baseColor="#fff"
+          menuColor="#000"
+          buttonBgColor="#111"
+          buttonTextColor="#fff"
+          ease="back.out(1.7)"
+        />
+      </div>
     </div>
   );
 }

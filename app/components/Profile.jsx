@@ -3,8 +3,7 @@
 import ChromaGrid from "../../components/ChromaGrid";
 import RotatingText from "../../components/RotatingText";
 import LogoLoop from "../../components/LogoLoop";
-
-// import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
+import GlareHover from "../../components/GlareHover";
 
 export default function Profile() {
   const items = [
@@ -45,12 +44,14 @@ export default function Profile() {
     { src: "https://skillicons.dev/icons?i=ps", alt: "Photoshop" },
     { src: "https://skillicons.dev/icons?i=htmx", alt: "HTMX" },
     { src: "https://skillicons.dev/icons?i=postman", alt: "Postman" },
-    { src: "https://skillicons.dev/icons?i=pr", alt: "Premiere Pro" }
+    { src: "https://skillicons.dev/icons?i=pr", alt: "Premiere Pro" },
   ];
 
   return (
-    <section className="flex flex-col md:flex-row justify-center items-center min-h-screen px-8 md:px-20 lg:px-32 py-16 gap-x-30">
-      <div className="flex flex-col items-start text-left space-y-6 max-w-xl -mt-75 -ml-60">
+    <section className="flex flex-col md:flex-row items-center justify-center min-h-screen px-6 md:px-16 lg:px-28 py-16 gap-65">
+      {/* KIRI - TEKS */}
+      <div className="flex flex-col items-start text-left space-y-6 max-w-xl md:w-1/2">
+        {/* Rotating Text */}
         <div>
           <RotatingText
             texts={[
@@ -61,7 +62,7 @@ export default function Profile() {
               "Database",
             ]}
             mainClassName="text-[var(--blacktext)] bg-[var(--background)] text-2xl sm:text-4xl md:text-5xl font-semibold tracking-wide overflow-hidden drop-shadow-[var(--dropshadow)] border-2 border-[var(--bordergrey)] px-4 py-2 rounded-lg"
-            staggerFrom={"first"}
+            staggerFrom="first"
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "-120%" }}
@@ -72,13 +73,15 @@ export default function Profile() {
           />
         </div>
 
-        <div className="relative origin-left -mt-1 text-[var(--blacktext)] bg-[var(--background)]">
-          <p className="-mr-30 pl-1 text-base">
+        {/* Deskripsi */}
+        <div className="text-[var(--blacktext)] bg-[var(--background)]">
+          <p className="text-base leading-relaxed">
             Information Technology Student • Passionate • Fast and Eager to learn • Adaptable • Proactive
           </p>
         </div>
 
-        <div className="mt-5 w-full overflow-hidden">
+        {/* Logo Loop */}
+        <div className="mt-10 w-full overflow-hidden">
           <LogoLoop
             logos={imageLogos}
             speed={120}
@@ -91,9 +94,50 @@ export default function Profile() {
             ariaLabel="Technology partners"
           />
         </div>
+
+        {/* Tombol GlareHover */}
+        <div className="flex flex-wrap mt-10 gap-5">
+          <GlareHover glareColor="#ffffff" glareOpacity={0.4}>
+            <a
+              href="/Khenichi Kuolimpo Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="px-6 py-2 border border-black bg-black text-white rounded-lg font-semibold hover:opacity-90 transition-all duration-300">
+                View CV
+              </button>
+            </a>
+          </GlareHover>
+          
+          <GlareHover glareColor="#ffffff" glareOpacity={0.4}>
+            <a
+              href="https://www.instagram.com/khenichi.k/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="px-6 py-2 border-1 border-black bg-gradient-to-r from-[#feda75] via-[#d62976] to-[#962fbf] text-white rounded-lg font-semibold">
+                Instagram
+              </button>
+            </a>
+          </GlareHover>
+
+          <GlareHover glareColor="#ffffff" glareOpacity={0.4}>
+            <a
+              href="https://www.linkedin.com/in/khenichi-kuolimpo-19067838a/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="px-6 py-2 border-1 border-black bg-[#2dd4bf] text-white rounded-lg font-semibold">
+                LinkedIn
+              </button>
+            </a>
+          </GlareHover>
+        </div>
+
       </div>
 
-      <div className="flex justify-center md:justify-end pointer-events-auto z-20 translate-x-50">
+      {/* KANAN - FOTO */}
+      <div className="flex justify-center md:justify-end md:w-1/2">
         <ChromaGrid
           items={items}
           radius={260}
