@@ -137,7 +137,7 @@ const CardNav = ({
     >
       <nav
         ref={navRef}
-        className={`card-nav ${isExpanded ? 'open' : ''} block h-[60px] p-0 rounded-xl shadow-md relative overflow-hidden will-change-[height]`}
+        className={`card-nav ${isExpanded ? 'open' : ''} block h-[60px] p-0 rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.15)] relative overflow-hidden will-change-[height]`}
         style={{ backgroundColor: baseColor }}
       >
         <div className="card-nav-top absolute inset-x-0 top-0 h-[60px] flex items-center justify-between p-2 pl-[1.1rem] z-[2]">
@@ -166,7 +166,13 @@ const CardNav = ({
               <img src={logo} alt={logoAlt} className="logo h-[28px]" />
             ) : (
               <GradientText
-                colors={["#291bc4ff", "#9dac3bff", "#37c73f", "#40c5c7ff", "#4039c4ff"]}
+                colors={[
+                  "#1c1494",
+                  "#7f8a2b",
+                  "#2b8f36",
+                  "#2b8c8f",
+                  "#2c2794"
+                ]}
                 animationSpeed={10}
                 showBorder={false}
                 className="text-xl font-bold select-none tracking-wide"
