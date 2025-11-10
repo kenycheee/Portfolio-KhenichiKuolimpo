@@ -2,6 +2,7 @@
 
 import Profile from "./components/Profile";
 import Projects from "./components/Projects";
+import About from "./components/About";
 
 export default function Home() {
   return (
@@ -12,6 +13,10 @@ export default function Home() {
 
       <section className="w-full">
         <Projects />
+      </section>
+
+      <section className="w-full">
+        <About />
       </section>
     </main>
   );

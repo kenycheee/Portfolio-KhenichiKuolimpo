@@ -1,6 +1,6 @@
 'use client';
 
-import ProjectsModal from "../../components/ProjectModal";
+import ProjectsModal from "../../components/Modal/ProjectModal";
 import AnimatedContent from "../../components/AnimatedContent";
 
 export default function Projects() {
