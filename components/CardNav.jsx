@@ -167,13 +167,15 @@ const CardNav = ({
             ) : (
               <GradientText
                 colors={[
-                  "#1c1494",
-                  "#7f8a2b",
-                  "#2b8f36",
-                  "#2b8c8f",
-                  "#2c2794"
+                  "#120E43",
+                  "#2E3192",
+                  "#00B4DB",
+                  "#2dcc92",
+                  "#00B4DB",
+                  "#2E3192",
+                  "#120E43",
                 ]}
-                animationSpeed={10}
+                animationSpeed={3}
                 showBorder={false}
                 className="text-xl font-bold select-none tracking-wide"
               >

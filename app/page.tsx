@@ -11,7 +11,7 @@ export default function Home() {
         <Profile />
       </section>
 
-      <section className="w-full flex justify-center">
+      <section className="w-full">
         <Projects />
       </section>
     </main>
