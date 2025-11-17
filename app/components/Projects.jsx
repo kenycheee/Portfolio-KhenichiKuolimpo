@@ -23,6 +23,13 @@ export default function Projects() {
             Featured Projects
         </div>
 
+        <div className="text-black mx-auto max-w-3xl leading-relaxed">
+            A curated collection of my personal and collaborative projects, showcasing
+            my journey in web and mobile development. Each project highlights the
+            technologies I’ve explored, problems I’ve solved, and the creative solutions
+            I’ve built along the way.
+        </div>
+
         <div className="text-left mt-20">
           <ProjectsModal />
         </div>
