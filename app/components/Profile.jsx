@@ -1,21 +1,11 @@
 'use client';
 
-import ChromaGrid from "../../components/ChromaGrid";
 import RotatingText from "../../components/RotatingText";
 import LogoLoop from "../../components/LogoLoop";
 import GlareHover from "../../components/GlareHover";
+import ProfileCard from "../../components/ProfileCard";
 
 export default function Profile() {
-  const items = [
-    {
-      image: "/assets/Profile.jpeg",
-      title: "Khenichi Kuolimpo",
-      subtitle: "Untarian '23 • Projects 2+",
-      handle: "Information Technology",
-      gradient: "linear-gradient(to right, #0f172a, #38bdf8, #1e3a8a)",
-    },
-  ];
-
   const imageLogos = [
     { src: "https://skillicons.dev/icons?i=html", alt: "HTML5" },
     { src: "https://skillicons.dev/icons?i=css", alt: "CSS3" },
@@ -149,14 +139,8 @@ export default function Profile() {
       </div>
 
       {/* KANAN - FOTO */}
-      <div className="flex justify-center md:justify-end md:w-1/2 bg-black rounded-2xl p-4">
-          <ChromaGrid
-            items={items}
-            radius={260}
-            damping={0.5}
-            fadeOut={0.5}
-            ease="power3.out"
-          />
+      <div className="flex justify-center md:justify-end md:w-1/2">
+        <ProfileCard />
       </div>
     </section>
   );
