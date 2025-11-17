@@ -19,12 +19,10 @@ export default function Projects() {
       triggerOnce={false}
     >
       <section className="w-full text-center space-y-6">
-        {/* Judul pakai Shuffle auto jalan */}
         <div className="text-4xl md:text-5xl font-bold text-black">
             Featured Projects
         </div>
 
-        {/* Modal daftar project */}
         <div className="text-left mt-20">
           <ProjectsModal />
         </div>

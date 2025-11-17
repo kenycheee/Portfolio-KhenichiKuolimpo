@@ -18,9 +18,23 @@ export default function About () {
         delay={0}
         triggerOnce={false}
         >
-            <div className="text-left mt-20">
-                <ExperienceModal />
-            </div>
+            <section className="w-full text-center space-y-6">
+                <div className="text-4xl md:text-5xl font-bold text-black">
+                    About Me!
+                </div>
+
+                <div className="text-black">
+                    A Information Technology student with a strong passion for software development, 
+                    especially in web and mobile applications. I love exploring new technologies, 
+                    designing intuitive user experiences, and building solutions that make everyday life easier.  
+                    I'm currently seeking any opportunity to enhance my technical skills and contribute 
+                    to real-world projects with a proactive, creative, and growth-oriented mindset.
+                </div>
+
+                <div className="text-left mt-20">
+                    <ExperienceModal />
+                </div>
+            </section>
         </AnimatedContent>
     );
 }
