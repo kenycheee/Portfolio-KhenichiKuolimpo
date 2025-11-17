@@ -3,6 +3,7 @@
 import Profile from "./components/Profile";
 import Projects from "./components/Projects";
 import About from "./components/About";
+import Technical from "./components/Technical";
 
 export default function Home() {
   return (
@@ -17,6 +18,10 @@ export default function Home() {
 
       <section className="w-full">
         <About />
+      </section>
+
+      <section className="w-full">
+        <Technical />
       </section>
     </main>
   );
