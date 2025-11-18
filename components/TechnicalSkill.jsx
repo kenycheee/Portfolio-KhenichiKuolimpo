@@ -10,6 +10,31 @@ import {
   Handshake,
 } from "lucide-react";
 
+/**
+ * TechnicalSkill Component
+ *
+ * A fully animated skill section consisting of 3 parts:
+ * 1. Technical Skills (progress bars)
+ * 2. Soft Skills (interactive icon list)
+ * 3. Languages (flag indicator + proficiency level)
+ *
+ * Built using Framer Motion for smooth reveal-on-scroll animations.
+ *
+ * @component
+ *
+ * @example
+ * ```jsx
+ * <TechnicalSkill />
+ * ```
+ *
+ * @remarks
+ * - Progress bars animate when scrolled into view.
+ * - Language proficiency uses 10-point bubble indicators.
+ * - Responsive for mobile → desktop using CSS grid + flexbox.
+ *
+ * @returns {JSX.Element} Animated skill section UI
+ */
+
 const skills = [
   { name: "Frontend Development", value: 95 },
   { name: "Backend Development", value: 93 },
