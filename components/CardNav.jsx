@@ -198,9 +198,15 @@ const CardNav = ({
               ref={setCardRef(idx)}
               style={{ backgroundColor: item.bgColor, color: item.textColor }}
             >
-              <div className="nav-card-label font-normal tracking-[-0.5px] text-[18px] md:text-[22px]">
+              <a 
+                href={item.href || "#"} 
+                className="nav-card-label font-normal tracking-[-0.5px] text-[18px] md:text-[22px]"
+                onClick={() => {
+                  if (isExpanded) toggleMenu();
+                }}
+                >
                 {item.label}
-              </div>
+              </a>
               <div className="nav-card-links mt-auto flex flex-col gap-[2px]">
                 {item.links?.map((lnk, i) => (
                   <a
