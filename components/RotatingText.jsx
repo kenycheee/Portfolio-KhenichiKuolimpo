@@ -80,7 +80,6 @@ const RotatingText = forwardRef((props, ref) => {
 
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
 
-  // Split string into grapheme clusters (handles emojis, diacritics, etc.)
   const splitIntoCharacters = text => {
     if (typeof Intl !== 'undefined' && Intl.Segmenter) {
       const segmenter = new Intl.Segmenter('en', { granularity: 'grapheme' });
@@ -89,7 +88,6 @@ const RotatingText = forwardRef((props, ref) => {
     return Array.from(text);
   };
 
-  // Build split structure for words/lines/characters
   const elements = useMemo(() => {
     const currentText = texts[currentTextIndex];
     if (splitBy === 'characters') {
@@ -117,7 +115,6 @@ const RotatingText = forwardRef((props, ref) => {
     }));
   }, [texts, currentTextIndex, splitBy]);
 
-  // Calculate delay for stagger animation
   const getStaggerDelay = useCallback(
     (index, totalChars) => {
       const total = totalChars;
@@ -136,7 +133,6 @@ const RotatingText = forwardRef((props, ref) => {
     [staggerFrom, staggerDuration]
   );
 
-  // Handle index change and trigger callback
   const handleIndexChange = useCallback(
     newIndex => {
       setCurrentTextIndex(newIndex);
@@ -145,7 +141,6 @@ const RotatingText = forwardRef((props, ref) => {
     [onNext]
   );
 
-  // Controls for manual rotation
   const next = useCallback(() => {
     const nextIndex = currentTextIndex === texts.length - 1 ? (loop ? 0 : currentTextIndex) : currentTextIndex + 1;
     if (nextIndex !== currentTextIndex) handleIndexChange(nextIndex);
@@ -168,10 +163,8 @@ const RotatingText = forwardRef((props, ref) => {
     if (currentTextIndex !== 0) handleIndexChange(0);
   }, [currentTextIndex, handleIndexChange]);
 
-  // Expose control functions through ref
   useImperativeHandle(ref, () => ({ next, previous, jumpTo, reset }), [next, previous, jumpTo, reset]);
 
-  // Auto rotation interval
   useEffect(() => {
     if (!auto) return;
     const intervalId = setInterval(next, rotationInterval);
