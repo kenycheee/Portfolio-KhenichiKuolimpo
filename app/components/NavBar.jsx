@@ -6,7 +6,7 @@ export default function NavBar() {
   const items = [
     {
       label: "Home",
-      href: "#home",
+      href: "#profile",
       bgColor: "#0D0716",
       textColor: "#fff",
       links: [
