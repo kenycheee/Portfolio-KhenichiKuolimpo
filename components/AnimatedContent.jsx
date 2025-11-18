@@ -48,7 +48,7 @@ const AnimatedContent = ({
         start: `top ${startPct}%`,
         toggleActions: triggerOnce
           ? 'play none none none'
-          : 'play reverse play reverse', // biar kalau triggerOnce false, dia bisa muncul-hilang
+          : 'play reverse play reverse',
         once: triggerOnce,
       },
     });

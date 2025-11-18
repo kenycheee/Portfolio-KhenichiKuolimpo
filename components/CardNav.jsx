@@ -1,9 +1,44 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
-// use your own icon import if react-icons is not available
 import { GoArrowUpRight } from 'react-icons/go';
 import GradientText from './GradientText';
 
+/**
+ * @typedef {Object} NavCardLink
+ * @property {string} label - Text shown inside the link
+ * @property {string} href - URL to navigate to
+ * @property {string} [ariaLabel] - Optional accessibility label
+ */
+
+/**
+ * @typedef {Object} NavCardItem
+ * @property {string} label - Title of the navigation card
+ * @property {string} href - Main redirect URL of the card
+ * @property {NavCardLink[]} [links] - Small button links inside the card
+ * @property {string} bgColor - Background color of the card
+ * @property {string} textColor - Text color of the card
+ */
+
+/**
+ * Expandable navigation component with animated cards driven by GSAP.
+ * - Displays a top bar with logo and hamburger trigger
+ * - Expands into multiple animated navigation cards
+ * - Mobile height automatically calculated
+ * - Uses GSAP stagger motion for card reveal
+ *
+ * @component
+ *
+ * @param {Object} props
+ * @param {string} [props.logo] - Optional image logo (if not provided, GradientText is used)
+ * @param {string} [props.logoAlt="Logo"] - Alt text for the logo
+ * @param {NavCardItem[]} props.items - Array of navigation card objects
+ * @param {string} [props.className] - Extra CSS classes for container wrapper
+ * @param {string} [props.ease="power3.out"] - GSAP easing
+ * @param {string} [props.baseColor="#fff"] - Background color of main nav container
+ * @param {string} [props.menuColor] - Color of hamburger menu
+ *
+ * @returns {JSX.Element}
+ */
 const CardNav = ({
   logo,
   logoAlt = 'Logo',
@@ -27,10 +62,12 @@ const CardNav = ({
     if (isMobile) {
       const contentEl = navEl.querySelector('.card-nav-content');
       if (contentEl) {
-        const wasVisible = contentEl.style.visibility;
-        const wasPointerEvents = contentEl.style.pointerEvents;
-        const wasPosition = contentEl.style.position;
-        const wasHeight = contentEl.style.height;
+        const prev = {
+          visibility: contentEl.style.visibility,
+          pointer: contentEl.style.pointerEvents,
+          position: contentEl.style.position,
+          height: contentEl.style.height,
+        };
 
         contentEl.style.visibility = 'visible';
         contentEl.style.pointerEvents = 'auto';
@@ -43,10 +80,10 @@ const CardNav = ({
         const padding = 16;
         const contentHeight = contentEl.scrollHeight;
 
-        contentEl.style.visibility = wasVisible;
-        contentEl.style.pointerEvents = wasPointerEvents;
-        contentEl.style.position = wasPosition;
-        contentEl.style.height = wasHeight;
+        contentEl.style.visibility = prev.visibility;
+        contentEl.style.pointerEvents = prev.pointer;
+        contentEl.style.position = prev.position;
+        contentEl.style.height = prev.height;
 
         return topBar + contentHeight + padding;
       }
@@ -54,7 +91,7 @@ const CardNav = ({
     return 260;
   };
 
-  const createTimeline = () => {
+  const createTimeline = useCallback(() => {
     const navEl = navRef.current;
     if (!navEl) return null;
 
@@ -72,7 +109,7 @@ const CardNav = ({
     tl.to(cardsRef.current, { y: 0, opacity: 1, duration: 0.4, ease, stagger: 0.08 }, '-=0.1');
 
     return tl;
-  };
+  }, [ease, items]);
 
   useLayoutEffect(() => {
     const tl = createTimeline();
@@ -82,8 +119,7 @@ const CardNav = ({
       tl?.kill();
       tlRef.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ease, items]);
+  }, [createTimeline]);
 
   useLayoutEffect(() => {
     const handleResize = () => {
@@ -110,8 +146,7 @@ const CardNav = ({
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isExpanded]);
+  }, [createTimeline, isExpanded]);
 
   const toggleMenu = () => {
     const tl = tlRef.current;
@@ -201,10 +236,8 @@ const CardNav = ({
               <a 
                 href={item.href || "#"} 
                 className="nav-card-label font-normal tracking-[-0.5px] text-[18px] md:text-[22px]"
-                onClick={() => {
-                  if (isExpanded) toggleMenu();
-                }}
-                >
+                onClick={() => { if (isExpanded) toggleMenu(); }}
+              >
                 {item.label}
               </a>
               <div className="nav-card-links mt-auto flex flex-col gap-[2px]">
@@ -214,9 +247,7 @@ const CardNav = ({
                     className="nav-card-link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px]"
                     href={lnk.href}
                     aria-label={lnk.ariaLabel}
-                    onClick={() => {
-                      if (isExpanded) toggleMenu();
-                    }}
+                    onClick={() => { if (isExpanded) toggleMenu(); }}
                   >
                     <GoArrowUpRight className="nav-card-link-icon shrink-0" aria-hidden="true" />
                     {lnk.label}
