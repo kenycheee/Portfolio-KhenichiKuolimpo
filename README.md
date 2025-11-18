@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio – Khenichi Kuolimpo
 
-## Getting Started
+Welcome to my personal portfolio website built with **Next.js**.  
+This website showcases my background, technical skills, projects, and contact information — designed to represent me professionally in the tech industry.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## About the Project
+This portfolio is created to:
+- Present my professional identity and career journey
+- Highlight my projects and technical capabilities in a structured way
+- Provide a modern, interactive experience for recruiters and clients
+- Serve as a future-proof portfolio that is easy to maintain and expand
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
+| Technology | Purpose |
+|-----------|---------|
+| Next.js | Main framework |
+| TypeScript | Type safety & scalability |
+| React | Component architecture |
+| Tailwind / CSS Modules | Modern responsive styling |
+| Vercel | Deployment |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Folder Structure
+/app           – Pages & layout  
+/components    – Reusable UI components  
+/public        – Static assets (images, icons, etc.)  
+/lib           – Helpers & utilities  
+package.json   – Dependencies & scripts  
+tsconfig.json  – TypeScript configuration
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Key Features
+- Animated landing page with professional introduction
+- Projects page displaying repositories and live demos
+- Skills section presenting technical abilities and tools
+- Contact page for collaboration & work opportunities
+- Minimalist, fast, responsive user interface
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Live Demo
+(Add your Vercel link here once deployed)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contact & Social Media
+| Platform | Link |
+|---------|------|
+| Email | khenichi.k@gmail.com |
+| GitHub | https://github.com/kenycheee |
+| LinkedIn | https://www.linkedin.com/in/khenichi-kuolimpo-19067838a/ |
+| Instagram | https://www.instagram.com/khenichi.k/ |
+
+---
+
+## Future Improvements
+- Responsive
+- Dark / light mode switch
+- Multilingual version (EN + ID)
