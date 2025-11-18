@@ -1,3 +1,29 @@
+/**
+ * GlareHover — A hover interaction wrapper that adds a sweeping light/glare animation.
+ *
+ * Features:
+ * - Smooth light reflection animation on hover
+ * - Customizable color, opacity, angle, duration & size
+ * - Optional play-once mode (glare runs only once per hover)
+ * - Fully wraps any children component (images, cards, buttons, etc.)
+ *
+ * Usage:
+ * <GlareHover glareColor="#00C2FF">
+ *   <div className="card">Hover me!</div>
+ * </GlareHover>
+ *
+ * 🛠 Props:
+ * @param {React.ReactNode} children - The wrapped element(s) to animate.
+ * @param {string} [glareColor='#39a4f0'] - Color of the glare in HEX format.
+ * @param {number} [glareOpacity=0.5] - Opacity of the glare (0–1).
+ * @param {number} [glareAngle=-45] - Glare sweep angle in degrees.
+ * @param {number} [glareSize=250] - Glare size (% of element surface).
+ * @param {number} [transitionDuration=650] - Animation duration in ms.
+ * @param {boolean} [playOnce=false] - If true, resets glare instantly after exit.
+ * @param {string} [className=''] - Additional wrapper class.
+ * @param {object} [style={}] - Inline styles for wrapper.
+ */
+
 import { useRef } from 'react';
 
 const GlareHover = ({
@@ -13,7 +39,6 @@ const GlareHover = ({
 }) => {
   const overlayRef = useRef(null);
 
-  // Convert hex → rgba
   const hex = glareColor.replace('#', '');
   let rgba = glareColor;
   if (/^[\dA-Fa-f]{6}$/.test(hex)) {
@@ -53,9 +78,9 @@ const GlareHover = ({
     position: 'absolute',
     inset: 0,
     backgroundImage: `linear-gradient(${glareAngle}deg,
-        hsla(0,0%,0%,0) 60%,
-        ${rgba} 70%,
-        hsla(0,0%,0%,0) 100%)`,
+      hsla(0,0%,0%,0) 60%,
+      ${rgba} 70%,
+      hsla(0,0%,0%,0) 100%)`,
     backgroundSize: `${glareSize}% ${glareSize}%, 100% 100%`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: '-100% -100%, 0 0',
