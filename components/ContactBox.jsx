@@ -4,49 +4,71 @@ import { motion } from "framer-motion";
 import { Mail, MapPin, Instagram, Linkedin, Github } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
+/**
+ * Contact item object definition
+ * @typedef {Object} ContactItem
+ * @property {JSX.Element} icon - Display icon component
+ * @property {string} label - Title of the contact information
+ * @property {string} value - The text shown under the label
+ * @property {string} href - Destination link when clicked
+ */
 
+/**
+ * Contact section that displays clickable contact cards
+ * including Email, WhatsApp, Instagram, LinkedIn, GitHub and Location.
+ * 
+ * - Cards animate when entering viewport
+ * - Hover and tap scale animation using Framer Motion
+ * - Fully responsive using Tailwind
+ *
+ * @component
+ * @returns {JSX.Element}
+ */
 export default function Contact() {
+  /** @type {ContactItem[]} */
+  const contactItems = [
+    {
+      icon: <Mail className="w-6 h-6" />,
+      label: "Email",
+      value: "khenichi.k@gmail.com",
+      href: "mailto:khenichi.k@gmail.com",
+    },
+    {
+      icon: <FaWhatsapp className="w-6 h-6" />,
+      label: "WhatsApp",
+      value: "+62-857-8112-2057",
+      href: "https://wa.me/6285781122057",
+    },
+    {
+      icon: <Instagram className="w-6 h-6" />,
+      label: "Instagram",
+      value: "@khenichi.k",
+      href: "https://www.instagram.com/khenichi.k/",
+    },
+    {
+      icon: <Linkedin className="w-6 h-6" />,
+      label: "LinkedIn",
+      value: "Khenichi Kuolimpo",
+      href: "https://www.linkedin.com/in/khenichi-kuolimpo-19067838a/",
+    },
+    {
+      icon: <Github className="w-6 h-6" />,
+      label: "GitHub",
+      value: "kenycheee",
+      href: "https://github.com/kenycheee",
+    },
+    {
+      icon: <MapPin className="w-6 h-6" />,
+      label: "Location",
+      value: "DKI Jakarta",
+      href: "https://www.google.com/maps?q=DKI+Jakarta",
+    },
+  ];
+
   return (
     <section className="w-full space-y-14 mt-20 mb-20">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
-        {[
-          {
-            icon: <Mail className="w-6 h-6" />,
-            label: "Email",
-            value: "khenichi.k@gmail.com",
-            href: "mailto:khenichi.k@gmail.com",
-          },
-          {
-            icon: <FaWhatsapp className="w-6 h-6" />,
-            label: "WhatsApp",
-            value: "+62-857-8112-2057",
-            href: "https://wa.me/6285781122057",
-          },
-          {
-            icon: <Instagram className="w-6 h-6" />,
-            label: "Instagram",
-            value: "@khenichi.k",
-            href: "https://www.instagram.com/khenichi.k/",
-          },
-          {
-            icon: <Linkedin className="w-6 h-6" />,
-            label: "Linkedin",
-            value: "Khenichi Kuolimpo",
-            href: "https://www.linkedin.com/in/khenichi-kuolimpo-19067838a/",
-          },
-          {
-            icon: <Github className="w-6 h-6" />,
-            label: "Github",
-            value: "kenycheee",
-            href: "https://github.com/kenycheee",
-          },
-          {
-            icon: <MapPin className="w-6 h-6" />,
-            label: "Location",
-            value: "DKI Jakarta",
-            href: "https://www.google.com/maps?q=DKI+Jakarta",
-          },
-        ].map((item, i) => (
+        {contactItems.map((item, i) => (
           <motion.a
             key={i}
             href={item.href}
