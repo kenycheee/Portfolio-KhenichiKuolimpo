@@ -4,6 +4,7 @@ import Profile from "./components/Profile";
 import Projects from "./components/Projects";
 import About from "./components/About";
 import Technical from "./components/Technical";
+import Contact from "./components/Contact";
 
 export default function Home() {
   return (
@@ -22,6 +23,10 @@ export default function Home() {
 
       <section id="skill" className="w-full">
         <Technical />
+      </section>
+
+      <section id="contact" className="w-full">
+        <Contact />
       </section>
     </main>
   );

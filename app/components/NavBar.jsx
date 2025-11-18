@@ -34,6 +34,7 @@ export default function NavBar() {
     },
     {
       label: "Contact",
+      href: "#contact",
       bgColor: "#342849", 
       textColor: "#fff",
       links: [
