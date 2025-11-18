@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+html {
+  scroll-padding-top: 125px;
+  scroll-behavior: smooth;
+}
+
 :root {
   --main: #0f0f2b;
   --background: #ffffff;

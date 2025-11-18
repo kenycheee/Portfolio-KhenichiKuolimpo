@@ -8,19 +8,19 @@ import Technical from "./components/Technical";
 export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center gap-60 py-20">
-      <section className="w-full flex justify-center">
+      <section id="profile" className="w-full flex justify-center">
         <Profile />
       </section>
 
-      <section className="w-full">
+      <section id="projects" className="w-full">
         <Projects />
       </section>
 
-      <section className="w-full">
+      <section id="about" className="w-full">
         <About />
       </section>
 
-      <section className="w-full">
+      <section id="skill" className="w-full">
         <Technical />
       </section>
     </main>
