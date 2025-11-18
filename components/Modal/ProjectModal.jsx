@@ -202,7 +202,6 @@ export default function ProjectsModal() {
         </div>
       </div>
 
-      {/* Modal */}
       {isOpen && activeProject && (
         <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-start md:items-center justify-center z-50 px-4 py-10">
 
@@ -216,7 +215,6 @@ export default function ProjectsModal() {
             </button>
 
             <div className="flex flex-col md:flex-row">
-              {/* Left / Top: Image + carousel controls */}
               <div className="w-full md:w-1/2 flex-shrink-0">
                 <div className="relative w-full max-h-[45vh] md:max-h-[60vh] flex items-center justify-center bg-gray-50">
                   <div className="relative w-full h-[45vh] md:h-[60vh]">
