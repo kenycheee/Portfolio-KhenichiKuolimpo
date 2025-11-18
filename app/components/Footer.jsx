@@ -3,6 +3,29 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, Github, Linkedin, Instagram } from "lucide-react";
 
+/**
+ * Footer Component
+ *
+ * Displays the personal footer section including:
+ * - Owner name
+ * - Social/contact icons with animated interactions
+ * - Dynamic copyrights
+ *
+ * Built using Framer Motion for hover/tap scaling animation and Lucide icons.
+ *
+ * @component
+ *
+ * @returns {JSX.Element} The rendered footer section.
+ *
+ * @remarks
+ * - Contact links open in a new tab and include `noopener noreferrer` for security.
+ * - `new Date().getFullYear()` ensures copyright auto-updates yearly.
+ * - Tailwind classes handle layout, spacing, blur effect, and responsiveness.
+ *
+ * @example
+ * // Placed at the bottom of the root layout or page
+ * <Footer />
+ */
 export default function Footer() {
   return (
     <footer className="w-full mt-28 border-t border-white/20 py-10 bg-white/30 backdrop-blur">
