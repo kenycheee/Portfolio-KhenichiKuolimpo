@@ -5,6 +5,27 @@ import LogoLoop from "../../components/LogoLoop";
 import GlareHover from "../../components/GlareHover";
 import ProfileCard from "../../components/ProfileCard";
 
+/**
+ * Profile Section Component
+ *
+ * Displays the hero section of the portfolio including:
+ * - Animated rotating skill titles
+ * - Short tagline / personal description
+ * - Infinite skill-logo carousel
+ * - Social / external action buttons with hover glare effects
+ * - Profile card (photo + identity)
+ *
+ * Positioned to be visually centered and responsive across screen sizes,
+ * with left side for text & actions and right side for the profile card.
+ *
+ * @component
+ *
+ * @returns {JSX.Element} The rendered profile section.
+ *
+ * @example
+ * // Usage inside a page
+ * <Profile />
+ */
 export default function Profile() {
   const imageLogos = [
     { src: "https://skillicons.dev/icons?i=html", alt: "HTML5" },
@@ -40,6 +61,7 @@ export default function Profile() {
   return (
     <section className="flex flex-col md:flex-row items-center justify-center min-h-[80vh] px-6 md:px-16 lg:px-28 py-16 gap-65">
       <div className="flex flex-col items-start text-left space-y-6 max-w-xl md:w-1/2">
+        
         <div>
           <RotatingText
             texts={[
@@ -93,7 +115,7 @@ export default function Profile() {
               </button>
             </a>
           </GlareHover>
-          
+
           <GlareHover glareColor="#ffffff" glareOpacity={0.7}>
             <a
               href="https://www.instagram.com/khenichi.k/"
@@ -130,7 +152,6 @@ export default function Profile() {
             </a>
           </GlareHover>
         </div>
-
       </div>
 
       <div className="flex justify-center md:justify-end md:w-1/2">

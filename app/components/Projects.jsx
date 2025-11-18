@@ -1,8 +1,27 @@
-'use client';
+/**
+ * @file Projects.jsx
+ * @description A section showcasing featured projects with animated content and modal view functionality.
+ * This component serves as the Projects page/section in a portfolio website, highlighting
+ * selected works to display the developer's capabilities and experience in web and mobile development.
+ */
+
+"use client";
 
 import ProjectsModal from "../../components/Modal/ProjectModal";
 import AnimatedContent from "../../components/AnimatedContent";
 
+/**
+ * Projects Component
+ *
+ * Renders a featured project section wrapped with animated scroll effects.
+ * It displays a title, a brief introduction text, and a modal component to show project details.
+ *
+ * @component
+ * @returns {JSX.Element} A section containing animated introduction and a modal trigger for projects.
+ *
+ * @example
+ * <Projects />
+ */
 export default function Projects() {
   return (
     <AnimatedContent
@@ -19,16 +38,17 @@ export default function Projects() {
       triggerOnce={false}
     >
       <section className="w-full text-center space-y-6">
-        <div className="text-4xl md:text-5xl font-bold text-black">
-            Featured Projects
-        </div>
 
-        <div className="text-black mx-auto max-w-3xl leading-relaxed">
-            A curated collection of my personal and collaborative projects, showcasing
-            my journey in web and mobile development. Each project highlights the
-            technologies I’ve explored, problems I’ve solved, and the creative solutions
-            I’ve built along the way.
-        </div>
+        <h2 className="text-4xl md:text-5xl font-bold text-black">
+          Featured Projects
+        </h2>
+
+        <p className="text-black mx-auto max-w-3xl leading-relaxed">
+          A curated collection of my personal and collaborative projects, showcasing
+          my journey in web and mobile development. Each project highlights the
+          technologies I’ve explored, problems I’ve solved, and the creative solutions
+          I’ve built along the way.
+        </p>
 
         <div className="text-left mt-20">
           <ProjectsModal />

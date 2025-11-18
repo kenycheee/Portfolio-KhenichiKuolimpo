@@ -179,7 +179,7 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, isHovered, pauseOn
 
     rafRef.current = requestAnimationFrame(animate);
     return () => {
-      if (rafRef.current !== null) cancelAnimationFrame(rafRefRef.current);
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
       lastTimestampRef.current = null;
     };
   }, [targetVelocity, seqWidth, isHovered, pauseOnHover, trackRef]);
