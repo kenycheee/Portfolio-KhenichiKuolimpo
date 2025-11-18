@@ -42,7 +42,6 @@ export default function GradientText({
   animationSpeed = 8,
   showBorder = false
 }) {
-  // Gradient animation styling
   const gradientStyle = {
     backgroundImage: `linear-gradient(to right, ${colors.join(', ')})`,
     animationDuration: `${animationSpeed}s`
@@ -50,7 +49,6 @@ export default function GradientText({
 
   return (
     <div className={`relative inline-block ${className}`}>
-      {/* Animated gradient text */}
       <span
         className="text-transparent bg-cover animate-gradient relative z-20"
         style={{
@@ -63,7 +61,6 @@ export default function GradientText({
         {children}
       </span>
 
-      {/* Optional glowing border effect */}
       {showBorder && (
         <span
           className="absolute inset-0 rounded-lg border border-transparent pointer-events-none animate-gradient"
