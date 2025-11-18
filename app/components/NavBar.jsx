@@ -34,7 +34,7 @@ export default function NavBar() {
       bgColor: "#342849", 
       textColor: "#fff",
       links: [
-        { label: "Contact Me!", ariaLabel: "Email us" }
+        { label: "Contact Me!", href: "#contact" }
       ]
     }
   ];

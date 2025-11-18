@@ -38,10 +38,8 @@ export default function Profile() {
   ];
 
   return (
-    <section className="flex flex-col md:flex-row items-center justify-center min-h-screen px-6 md:px-16 lg:px-28 py-16 gap-65">
-      {/* KIRI - TEKS */}
+    <section className="flex flex-col md:flex-row items-center justify-center min-h-[80vh] px-6 md:px-16 lg:px-28 py-16 gap-65">
       <div className="flex flex-col items-start text-left space-y-6 max-w-xl md:w-1/2">
-        {/* Rotating Text */}
         <div>
           <RotatingText
             texts={[
@@ -63,14 +61,12 @@ export default function Profile() {
           />
         </div>
 
-        {/* Deskripsi */}
         <div className="text-[var(--blacktext)] bg-[var(--background)]">
           <p className="text-base leading-relaxed">
             Information Technology Student • Passionate • Fast and Eager to learn • Adaptable • Proactive
           </p>
         </div>
 
-        {/* Logo Loop */}
         <div className="mt-10 w-full overflow-hidden">
           <LogoLoop
             logos={imageLogos}
@@ -85,7 +81,6 @@ export default function Profile() {
           />
         </div>
 
-        {/* Tombol GlareHover */}
         <div className="flex flex-wrap mt-10 gap-5">
           <GlareHover glareColor="#ffffff" glareOpacity={0.7}>
             <a
@@ -93,7 +88,7 @@ export default function Profile() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="px-6 py-2 border-[1.5px] border-black bg-gradient-to-r from-[#052e16] via-[#10b981] to-[#052e16] text-white rounded-lg font-semibold">
+              <button className="px-6 py-2 border-[1.5px] border-black bg-gradient-to-r from-[#052e16] via-[#10b981] to-[#052e16] text-white rounded-lg font-semibold cursor-pointer">
                 View CV
               </button>
             </a>
@@ -105,7 +100,7 @@ export default function Profile() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="px-6 py-2 border-[1.5px] border-black bg-gradient-to-r from-[#feda75] via-[#d62976] to-[#962fbf] text-white rounded-lg font-semibold">
+              <button className="px-6 py-2 border-[1.5px] border-black bg-gradient-to-r from-[#feda75] via-[#d62976] to-[#962fbf] text-white rounded-lg font-semibold cursor-pointer">
                 Instagram
               </button>
             </a>
@@ -117,7 +112,7 @@ export default function Profile() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="px-6 py-2 border-[1.5px] border-black bg-gradient-to-r from-[#0f766e] via-[#14b8a6] to-[#a7f3d0] text-white rounded-lg font-semibold">
+              <button className="px-6 py-2 border-[1.5px] border-black bg-gradient-to-r from-[#0f766e] via-[#14b8a6] to-[#a7f3d0] text-white rounded-lg font-semibold cursor-pointer">
                 LinkedIn
               </button>
             </a>
@@ -129,7 +124,7 @@ export default function Profile() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="px-6 py-2 border-[1.5px] border-black bg-gradient-to-r from-[#0f172a] via-[#1e40af] to-[#0f172a] text-white rounded-lg font-semibold">
+              <button className="px-6 py-2 border-[1.5px] border-black bg-gradient-to-r from-[#0f172a] via-[#1e40af] to-[#0f172a] text-white rounded-lg font-semibold cursor-pointer">
                 GitHub
               </button>
             </a>
@@ -138,7 +133,6 @@ export default function Profile() {
 
       </div>
 
-      {/* KANAN - FOTO */}
       <div className="flex justify-center md:justify-end md:w-1/2">
         <ProfileCard />
       </div>
