@@ -68,20 +68,14 @@ export default function NavBar() {
   ];
 
   return (
-    <div
-      className="pointer-events-none fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-[99] rounded-xl transition-all duration-500"
-    >
-      <div className="pointer-events-auto">
-        <CardNav
-          logoAlt="Company Logo"
-          items={items}
-          baseColor="#fff"
-          menuColor="#000"
-          buttonBgColor="#111"
-          buttonTextColor="#fff"
-          ease="back.out(1.7)"
-        />
-      </div>
-    </div>
+    <CardNav
+      logoAlt="Company Logo"
+      items={items}
+      baseColor="#fff"
+      menuColor="#000"
+      buttonBgColor="#111"
+      buttonTextColor="#fff"
+      ease="back.out(1.7)"
+    />
   );
 }
