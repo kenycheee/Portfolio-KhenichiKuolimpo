@@ -129,12 +129,8 @@ export default function ProjectsModal() {
   return (
     <section className="flex flex-col bg-white text-gray-900">
       <div className="px-0">
-        <div
-          ref={scrollRef}
-          className="w-full overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent"
-          style={{ scrollBehavior: 'smooth' }}
-        >
-          <div className="flex flex-row justify-start items-stretch gap-8 min-w-max ml-8 md:ml-20 lg:ml-28 mr-12 md:mr-24 lg:mr-32">
+        <div ref={scrollRef} className="w-full pb-6 md:overflow-x-auto overflow-x-visible scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent" style={{ scrollBehavior: 'smooth' }}>
+          <div className="flex flex-col gap-6 px-6 md:flex md:flex-row md:gap-8 md:min-w-max md:px-0 md:ml-20 md:mr-24 lg:ml-28 lg:mr-32">
             {projects.map((project, index) => (
               <article
                 key={index}

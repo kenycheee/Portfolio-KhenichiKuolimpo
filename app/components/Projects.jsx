@@ -35,7 +35,7 @@ export default function Projects() {
       scale={1}
       threshold={0.1}
       delay={0}
-      triggerOnce={false}
+      triggerOnce={true}
     >
       <section className="w-full text-center space-y-6">
 
@@ -43,7 +43,7 @@ export default function Projects() {
           Featured Projects
         </h2>
 
-        <p className="text-black mx-auto max-w-3xl leading-relaxed">
+        <p className="text-black mx-auto leading-relaxed max-w-[300px] sm:max-w-sm md:max-w-xl lg:max-w-3xl">
           A curated collection of my personal and collaborative projects, showcasing
           my journey in web and mobile development. Each project highlights the
           technologies I’ve explored, problems I’ve solved, and the creative solutions
