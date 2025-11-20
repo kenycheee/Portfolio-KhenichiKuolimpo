@@ -58,7 +58,7 @@ export default function ProfileCard({ items = [] }) {
           key={i}
           className="group relative flex flex-col overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900 transition-all duration-300 hover:scale-[1.03] hover:border-neutral-600"
         >
-          <div className="w-full h-64 overflow-hidden">
+          <div className="w-full h-78 sm:h-80 md:h-[16rem] overflow-hidden">
             <img
               src={p.image}
               alt={p.name}

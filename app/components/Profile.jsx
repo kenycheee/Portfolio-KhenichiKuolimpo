@@ -60,8 +60,7 @@ export default function Profile() {
 
   return (
     <section className="flex flex-col md:flex-row items-center justify-center min-h-[80vh] px-6 md:px-16 lg:px-28 py-16 gap-65">
-      <div className="flex flex-col items-start text-left space-y-6 max-w-xl md:w-1/2">
-        
+      <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-6 max-w-xl md:w-1/2">
         <div>
           <RotatingText
             texts={[
@@ -83,13 +82,13 @@ export default function Profile() {
           />
         </div>
 
-        <div className="text-[var(--blacktext)] bg-[var(--background)]">
+        <div className="text-[var(--blacktext)] bg-[var(--background)] max-w-xs sm:max-w-sm md:max-w-md mx-auto md:mx-0">
           <p className="text-base leading-relaxed">
             Information Technology Student • Passionate • Fast and Eager to learn • Adaptable • Proactive
           </p>
         </div>
 
-        <div className="mt-10 w-full overflow-hidden">
+        <div className="mt-4 w-full overflow-hidden">
           <LogoLoop
             logos={imageLogos}
             speed={120}
@@ -103,50 +102,35 @@ export default function Profile() {
           />
         </div>
 
-        <div className="flex flex-wrap mt-10 gap-5">
+        <div
+          className="flex flex-wrap justify-center md:justify-start mt-10 gap-5 w-full max-w-xs sm:max-w-sm md:max-w-none mx-auto md:mx-0">
           <GlareHover glareColor="#ffffff" glareOpacity={0.7}>
-            <a
-              href="/Khenichi Kuolimpo Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <button className="px-6 py-2 border-[1.5px] border-black bg-gradient-to-r from-[#052e16] via-[#10b981] to-[#052e16] text-white rounded-lg font-semibold cursor-pointer">
+            <a href="/Khenichi Kuolimpo Resume.pdf" target="_blank" rel="noopener noreferrer">
+              <button className="w-28 h-12 border-[1.5px] border-black bg-gradient-to-r from-[#052e16] via-[#10b981] to-[#052e16] text-white rounded-lg font-semibold">
                 View CV
               </button>
             </a>
           </GlareHover>
 
           <GlareHover glareColor="#ffffff" glareOpacity={0.7}>
-            <a
-              href="https://www.instagram.com/khenichi.k/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <button className="px-6 py-2 border-[1.5px] border-black bg-gradient-to-r from-[#feda75] via-[#d62976] to-[#962fbf] text-white rounded-lg font-semibold cursor-pointer">
+            <a href="https://www.instagram.com/khenichi.k/" target="_blank" rel="noopener noreferrer">
+              <button className="w-28 h-12 border-[1.5px] border-black bg-gradient-to-r from-[#feda75] via-[#d62976] to-[#962fbf] text-white rounded-lg font-semibold">
                 Instagram
               </button>
             </a>
           </GlareHover>
 
           <GlareHover glareColor="#ffffff" glareOpacity={0.7}>
-            <a
-              href="https://www.linkedin.com/in/khenichi-kuolimpo-19067838a/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <button className="px-6 py-2 border-[1.5px] border-black bg-gradient-to-r from-[#0f766e] via-[#14b8a6] to-[#a7f3d0] text-white rounded-lg font-semibold cursor-pointer">
+            <a href="https://www.linkedin.com/in/khenichi-kuolimpo-19067838a/" target="_blank" rel="noopener noreferrer">
+              <button className="w-28 h-12 border-[1.5px] border-black bg-gradient-to-r from-[#0f766e] via-[#14b8a6] to-[#a7f3d0] text-white rounded-lg font-semibold">
                 LinkedIn
               </button>
             </a>
           </GlareHover>
 
           <GlareHover glareColor="#ffffff" glareOpacity={0.7}>
-            <a
-              href="https://github.com/kenycheee"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <button className="px-6 py-2 border-[1.5px] border-black bg-gradient-to-r from-[#0f172a] via-[#1e40af] to-[#0f172a] text-white rounded-lg font-semibold cursor-pointer">
+            <a href="https://github.com/kenycheee" target="_blank" rel="noopener noreferrer">
+              <button className="w-28 h-12 border-[1.5px] border-black bg-gradient-to-r from-[#0f172a] via-[#1e40af] to-[#0f172a] text-white rounded-lg font-semibold">
                 GitHub
               </button>
             </a>
@@ -154,7 +138,7 @@ export default function Profile() {
         </div>
       </div>
 
-      <div className="flex justify-center md:justify-end md:w-1/2">
+      <div className="flex justify-center md:justify-end w-full md:w-1/2 -mt-45 sm:mt-4 md:mt-0 mx-auto md:mx-0 max-w-xs sm:max-w-sm md:max-w-none">
         <ProfileCard />
       </div>
     </section>
