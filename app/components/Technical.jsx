@@ -36,7 +36,7 @@ export default function About () {
             scale={1}
             threshold={0.1}
             delay={0}
-            triggerOnce={false}
+            triggerOnce={true}
         >
             <section className="w-full text-center space-y-6">
                 <div className="mx-auto max-w-4xl px-4"> 
