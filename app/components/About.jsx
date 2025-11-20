@@ -35,14 +35,14 @@ export default function About() {
       scale={1}
       threshold={0.1}
       delay={0}
-      triggerOnce={false}
+      triggerOnce={true}
     >
       <section className="w-full text-center space-y-6">
         <div className="text-4xl md:text-5xl font-bold text-black">
           About Me!
         </div>
 
-        <div className="text-black mx-auto max-w-3xl leading-relaxed">
+        <div className="text-black mx-auto leading-relaxed max-w-[300px] sm:max-w-sm md:max-w-xl lg:max-w-3xl">
           A Information Technology student with a strong passion for software development,
           especially in web and mobile applications. I love exploring new technologies,
           designing intuitive user experiences, and building solutions that make everyday life easier.
