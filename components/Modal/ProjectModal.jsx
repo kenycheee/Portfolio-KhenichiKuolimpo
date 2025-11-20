@@ -59,16 +59,7 @@ export default function ProjectsModal() {
       detail:
         'Song Extractor is a classical music application that allows users to view digital music sheets, explore classical compositions, and share their own performances or posts. The app is designed with a clean and elegant interface to make discovering and studying classical music both accessible and inspiring.',
       thumb: '/assets/SE1.jpg',
-      images: [
-        '/assets/SE1.jpg',
-        '/assets/SE2.jpg',
-        '/assets/SE3.jpg',
-        '/assets/SE4.jpg',
-        '/assets/SE5.jpg',
-        '/assets/SE6.jpg',
-        '/assets/SE7.jpg',
-        '/assets/SE8.jpg',
-      ],
+      images: ['/assets/SE1.jpg', '/assets/SE2.jpg', '/assets/SE3.jpg', '/assets/SE4.jpg', '/assets/SE5.jpg', '/assets/SE6.jpg', '/assets/SE7.jpg', '/assets/SE8.jpg'],
       tags: ['Figma', 'Flutter', 'Firebase'],
       repo: 'https://github.com/kenycheee/SongExtractor.git',
     },
@@ -79,14 +70,7 @@ export default function ProjectsModal() {
       detail:
         'This application is designed to record and monitor the stock of raw materials, roll fiber, plastic cups, and recycled products in real-time. The system also automatically calculates error rates between production processes, helping to minimize mistakes and improve material management efficiency.',
       thumb: '/assets/Project2.png',
-      images: [
-        '/assets/Project1.png',
-        '/assets/Project2.png',
-        '/assets/Project3.png',
-        '/assets/Project4.png',
-        '/assets/Project5.png',
-        '/assets/Project6.png',
-      ],
+      images: ['/assets/Project1.png', '/assets/Project2.png', '/assets/Project3.png', '/assets/Project4.png', '/assets/Project5.png', '/assets/Project6.png'],
       tags: ['HTML', 'CSS', 'JS', 'MongoDB', 'Electron', 'Figma'],
       repo: 'https://github.com/IGALAN9/Stockflow.git',
     },
@@ -96,13 +80,7 @@ export default function ProjectsModal() {
       detail:
         'PakanMoo is a UI/UX design project for a mobile application that helps farmers efficiently manage cattle feeding schedules. The interface emphasizes simplicity and friendly visuals, featuring farm-themed elements such as barns, fences, and cows to create an engaging user experience.',
       thumb: '/assets/Pakanmoo.png',
-      images: [
-        '/assets/Pakanmoo.png',
-        '/assets/Pakanmoo1.png',
-        '/assets/Pakanmoo2.png',
-        '/assets/Pakanmoo3.png',
-        '/assets/Pakanmoo4.png',
-      ],
+      images: ['/assets/Pakanmoo.png', '/assets/Pakanmoo1.png', '/assets/Pakanmoo2.png', '/assets/Pakanmoo3.png', '/assets/Pakanmoo4.png'],
       tags: ['Figma'],
       repo: 'https://www.figma.com/design/1fyFyWjSS6ydeYp1JyRqkf/Untitled?t=untZhwFLHq7DjDOX-0',
       liveUrl: 'https://www.figma.com/proto/1fyFyWjSS6ydeYp1JyRqkf/Untitled?node-id=10-3&starting-point-node-id=1%3A5',
