@@ -35,7 +35,7 @@ export default function Contact() {
       scale={1}
       threshold={0.1}
       delay={0}
-      triggerOnce={false}
+      triggerOnce={true}
     >
       <section className="w-full text-center space-y-6">
         <div className="text-4xl md:text-5xl font-bold text-black">
