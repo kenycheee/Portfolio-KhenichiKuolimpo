@@ -68,14 +68,16 @@ export default function NavBar() {
   ];
 
   return (
-    <CardNav
-      logoAlt="Company Logo"
-      items={items}
-      baseColor="#fff"
-      menuColor="#000"
-      buttonBgColor="#111"
-      buttonTextColor="#fff"
-      ease="back.out(1.7)"
-    />
+    <div className='sticky top-0 z-50'>
+      <CardNav
+        logoAlt="Company Logo"
+        items={items}
+        baseColor="#fff"
+        menuColor="#000"
+        buttonBgColor="#111"
+        buttonTextColor="#fff"
+        ease="back.out(1.7)"
+      />
+    </div>
   );
 }
