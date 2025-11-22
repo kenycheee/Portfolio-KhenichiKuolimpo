@@ -44,7 +44,7 @@ export default function ProfileCard({ items = [] }) {
       image: "/assets/Profile.jpeg",
       name: "Khenichi Kuolimpo",
       role: "Information Technology",
-      subtitle: "Untarian '23 • Projects 2+",
+      subtitle: "Untarian '23 • Projects 4+",
       username: "@khenichi.k",
     },
   ];
