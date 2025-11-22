@@ -36,3 +36,9 @@ html {
 .animate-gradient {
   animation: gradient-move 10s ease infinite;
 }
+
+@media (max-width: 640px){
+  .logoloop-fade {
+    width: 12px !important;
+  }
+}

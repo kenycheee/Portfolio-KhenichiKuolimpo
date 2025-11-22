@@ -190,7 +190,7 @@ export const LogoLoop = memo(
     logos,
     speed = 120,
     direction = 'left',
-    width = '100%',
+    width = 'auto',
     logoHeight = 28,
     gap = 32,
     pauseOnHover = false,
@@ -351,7 +351,8 @@ export const LogoLoop = memo(
 
     const containerStyle = useMemo(
       () => ({
-        width: toCssLength(width) ?? '100%',
+        width: toCssLength(width),
+        maxWidth:'100%',
         ...cssVariables,
         ...style
       }),
@@ -373,7 +374,7 @@ export const LogoLoop = memo(
             <div
               aria-hidden
               className={cx(
-                'pointer-events-none absolute inset-y-0 left-0 z-[1]',
+                'pointer-events-none absolute inset-y-0 right-0 z-[1] logoloop-fade',
                 'w-[clamp(24px,8%,120px)]',
                 'bg-[linear-gradient(to_right,var(--logoloop-fadeColor,var(--logoloop-fadeColorAuto))_0%,rgba(0,0,0,0)_100%)]'
               )}

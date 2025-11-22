@@ -88,7 +88,7 @@ export default function Profile() {
           </p>
         </div>
 
-        <div className="mt-4 w-full overflow-hidden">
+        <div className="mt-4 w-full max-w-80 md:max-w-full mx-auto overflow-hidden px-4">
           <LogoLoop
             logos={imageLogos}
             speed={120}
@@ -96,8 +96,7 @@ export default function Profile() {
             logoHeight={60}
             gap={40}
             scaleOnHover
-            fadeOut
-            fadeOutColor="#ffffff"
+            pauseOnHover="true"
             ariaLabel="Technology partners"
           />
         </div>
