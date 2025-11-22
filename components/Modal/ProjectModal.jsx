@@ -18,6 +18,7 @@ export default function ProjectsModal() {
   const [activeProject, setActiveProject] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const scrollRef = useRef(null);
+  const modalRef = useRef(null);
 
   useEffect(() => {
     const navbar = document.querySelector('nav');
@@ -27,6 +28,15 @@ export default function ProjectsModal() {
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollLeft = 0;
   }, []);
+
+  useEffect(() => {
+    if (isOpen && modalRef.current) {
+      modalRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [isOpen]);
 
   const projects = [
     {
@@ -107,7 +117,11 @@ export default function ProjectsModal() {
   return (
     <section className="flex flex-col bg-white text-gray-900">
       <div className="px-0">
-        <div ref={scrollRef} className="w-full pb-6 md:overflow-x-auto overflow-x-visible scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent" style={{ scrollBehavior: 'smooth' }}>
+        <div
+          ref={scrollRef}
+          className="w-full pb-6 md:overflow-x-auto overflow-x-visible scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent"
+          style={{ scrollBehavior: 'smooth' }}
+        >
           <div className="flex flex-col gap-6 px-6 md:flex md:flex-row md:gap-8 md:min-w-max md:px-0 md:ml-20 md:mr-24 lg:ml-28 lg:mr-32">
             {projects.map((project, index) => (
               <article
@@ -177,9 +191,12 @@ export default function ProjectsModal() {
       </div>
 
       {isOpen && activeProject && (
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-start md:items-center justify-center z-50 px-4 py-10">
+        <div
+          ref={modalRef}
+          className="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 px-4 py-10"
+        >
 
-          <div className="bg-white text-gray-900 rounded-2xl relative w-full max-w-4xl shadow-2xl max-h-[90vh] overflow-hidden">
+          <div className="bg-white text-gray-900 rounded-2xl relative w-full max-w-4xl shadow-2xl max-h-[100vh] overflow-hidden">
             <button
               onClick={closeModal}
               className="absolute top-4 right-4 text-xl text-gray-500 hover:text-black z-20"
@@ -281,6 +298,7 @@ export default function ProjectsModal() {
               </div>
             </div>
           </div>
+
         </div>
       )}
     </section>
