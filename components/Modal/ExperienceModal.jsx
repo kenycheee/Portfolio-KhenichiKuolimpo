@@ -24,6 +24,7 @@ export default function ProjectsModal() {
   const [activeExperience, setActiveExperience] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const scrollRef = useRef(null);
+  const modalRef = useRef(null);
 
   useEffect(() => {
     const navbar = document.querySelector('nav');
@@ -33,6 +34,15 @@ export default function ProjectsModal() {
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollLeft = 0;
   }, []);
+
+  useEffect(() => {
+    if (isOpen && modalRef.current) {
+      modalRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [isOpen]);
 
   const experiences = [
     {
@@ -116,7 +126,11 @@ export default function ProjectsModal() {
       </div>
 
       {isOpen && activeExperience && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+        <div 
+          ref={modalRef}
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50"
+          >
+            
           <div className="bg-white text-gray-900 p-8 rounded-2xl relative w-[90%] max-w-4xl shadow-2xl max-h-[95vh] overflow-y-auto">
             <button
               onClick={closeModal}
