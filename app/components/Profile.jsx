@@ -105,7 +105,7 @@ export default function Profile() {
           className="flex flex-wrap justify-center md:justify-start mt-10 gap-5 w-full max-w-xs sm:max-w-sm md:max-w-none mx-auto md:mx-0">
           <GlareHover glareColor="#ffffff" glareOpacity={0.7}>
             <a href="/Khenichi Kuolimpo Resume.pdf" target="_blank" rel="noopener noreferrer">
-              <button className="w-28 h-12 border-[1.5px] border-black bg-gradient-to-r from-[#052e16] via-[#10b981] to-[#052e16] text-white rounded-lg font-semibold">
+              <button className="w-28 h-12 border-[1.5px] cursor-pointer border-black bg-gradient-to-r from-[#052e16] via-[#10b981] to-[#052e16] text-white rounded-lg font-semibold">
                 View CV
               </button>
             </a>
@@ -113,7 +113,7 @@ export default function Profile() {
 
           <GlareHover glareColor="#ffffff" glareOpacity={0.7}>
             <a href="https://www.instagram.com/khenichi.k/" target="_blank" rel="noopener noreferrer">
-              <button className="w-28 h-12 border-[1.5px] border-black bg-gradient-to-r from-[#feda75] via-[#d62976] to-[#962fbf] text-white rounded-lg font-semibold">
+              <button className="w-28 h-12 border-[1.5px] cursor-pointer border-black bg-gradient-to-r from-[#feda75] via-[#d62976] to-[#962fbf] text-white rounded-lg font-semibold">
                 Instagram
               </button>
             </a>
@@ -121,7 +121,7 @@ export default function Profile() {
 
           <GlareHover glareColor="#ffffff" glareOpacity={0.7}>
             <a href="https://www.linkedin.com/in/khenichi-kuolimpo-19067838a/" target="_blank" rel="noopener noreferrer">
-              <button className="w-28 h-12 border-[1.5px] border-black bg-gradient-to-r from-[#0f766e] via-[#14b8a6] to-[#a7f3d0] text-white rounded-lg font-semibold">
+              <button className="w-28 h-12 border-[1.5px] cursor-pointer border-black bg-gradient-to-r from-[#0f766e] via-[#14b8a6] to-[#a7f3d0] text-white rounded-lg font-semibold">
                 LinkedIn
               </button>
             </a>
@@ -129,7 +129,7 @@ export default function Profile() {
 
           <GlareHover glareColor="#ffffff" glareOpacity={0.7}>
             <a href="https://github.com/kenycheee" target="_blank" rel="noopener noreferrer">
-              <button className="w-28 h-12 border-[1.5px] border-black bg-gradient-to-r from-[#0f172a] via-[#1e40af] to-[#0f172a] text-white rounded-lg font-semibold">
+              <button className="w-28 h-12 border-[1.5px] cursor-pointer border-black bg-gradient-to-r from-[#0f172a] via-[#1e40af] to-[#0f172a] text-white rounded-lg font-semibold">
                 GitHub
               </button>
             </a>
