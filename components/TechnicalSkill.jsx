@@ -35,13 +35,52 @@ import {
  * @returns {JSX.Element} Animated skill section UI
  */
 
-const skills = [
-  { name: "Frontend Development", value: 95 },
-  { name: "Backend Development", value: 93 },
-  { name: "Database Management", value: 94 },
-  { name: "Mobile App Development", value: 92 },
-  { name: "UI/UX Design", value: 97 },
-  { name: "Video Production & Editing", value: 87 },
+const techSkills = [
+  {
+    name: "Frontend Development",
+    icons: [
+      { src: "https://skillicons.dev/icons?i=html", alt: "HTML" },
+      { src: "https://skillicons.dev/icons?i=css", alt: "CSS" },
+      { src: "https://skillicons.dev/icons?i=js", alt: "JavaScript" },
+      { src: "https://skillicons.dev/icons?i=react", alt: "React" },
+      { src: "https://skillicons.dev/icons?i=next", alt: "Next.js" },
+      { src: "https://skillicons.dev/icons?i=tailwind", alt: "Tailwind" },
+      { src: "https://skillicons.dev/icons?i=bootstrap", alt: "Bootstrap" },
+      { src: "https://skillicons.dev/icons?i=jquery", alt: "jQuery" },
+      { src: "https://skillicons.dev/icons?i=htmx", alt: "HTMX" },
+    ],
+  },
+  {
+    name: "Backend Development",
+    icons: [
+      { src: "https://skillicons.dev/icons?i=nodejs", alt: "Node.js" },
+      { src: "https://skillicons.dev/icons?i=php", alt: "PHP" },
+      { src: "https://skillicons.dev/icons?i=laravel", alt: "Laravel" },
+      { src: "https://skillicons.dev/icons?i=postman", alt: "Postman" },
+    ],
+  },
+  {
+    name: "Databases",
+    icons: [
+      { src: "https://skillicons.dev/icons?i=postgres", alt: "PostgreSQL" },
+      { src: "https://skillicons.dev/icons?i=mongodb", alt: "MongoDB" },
+      { src: "https://skillicons.dev/icons?i=firebase", alt: "Firebase" },
+    ],
+  },
+  {
+    name: "Mobile App Development",
+    icons: [
+      { src: "https://skillicons.dev/icons?i=flutter", alt: "Flutter" },
+      { src: "https://skillicons.dev/icons?i=dart", alt: "Dart" },
+    ],
+  },
+  {
+    name: "Design & Editing",
+    icons: [
+      { src: "https://skillicons.dev/icons?i=figma", alt: "Figma" },
+      { src: "https://skillicons.dev/icons?i=pr", alt: "Premiere Pro" },
+    ],
+  },
 ];
 
 const softSkills = [
@@ -67,7 +106,7 @@ export default function TechnicalSkill() {
         <h3 className="text-4xl font-bold">Technical Skills</h3>
 
         <div className="space-y-7">
-          {skills.map((skill, i) => (
+          {techSkills.map((skill, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
@@ -76,18 +115,32 @@ export default function TechnicalSkill() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="bg-white/40 backdrop-blur-md border border-white/30 p-5 rounded-2xl shadow-md"
             >
-              <div className="flex justify-between text-sm font-semibold text-black mb-3">
-                <span>{skill.name}</span>
-                <span className="opacity-60">{skill.value}%</span>
-              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-lg font-semibold">{skill.name}</span>
 
-              <div className="w-full bg-gray-200/70 h-3 rounded-xl overflow-hidden">
-                <motion.div
-                  className="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${skill.value}%` }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                />
+                <div className="flex flex-wrap gap-2 justify-end">
+                  {skill.icons.map((icon, idx) => (
+                    <div key={idx} className="relative group">
+                      <img
+                        src={icon.src}
+                        alt={icon.alt}
+                        className="w-7 h-7 transition-transform duration-200 group-hover:scale-110"
+                      />
+
+                      <span className="
+                        absolute -top-8 left-1/2 -translate-x-1/2
+                        px-2 py-1 text-xs rounded-md
+                        bg-black text-white
+                        opacity-0 group-hover:opacity-100
+                        group-hover:-top-10
+                        transition-all duration-200
+                        whitespace-nowrap
+                      ">
+                        {icon.alt}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}
@@ -138,7 +191,7 @@ export default function TechnicalSkill() {
               <p className="text-sm text-gray-600 mb-4">
                 {lang.filled >= 9
                   ? "Fluent"
-                  : lang.filled >= 7
+                  : lang.filled >= 8
                   ? "Advanced"
                   : lang.filled >= 5
                   ? "Intermediate"
