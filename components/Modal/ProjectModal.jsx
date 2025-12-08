@@ -47,7 +47,7 @@ export default function ProjectsModal() {
         'Colorfy is a modern color palette generator that allows users to easily create, customize, and manage their own color collections. Built with a fully responsive interface, Colorfy provides an intuitive editing experience where each color can be adjusted in real-time. With Firebase Authentication and Firestore integration, users can securely save their palettes, access them across devices, and keep everything synced seamlessly. Perfect for designers, developers, and anyone who works with color.',
       thumb: '/assets/Cy1.png',
       images: ['/assets/Cy1.png', '/assets/Cy2.png', '/assets/Cy3.png', '/assets/Cy4.png', '/assets/Cy5.png', '/assets/Cy6.png', '/assets/Cy7.png', '/assets/Cy8.png', '/assets/Cy9.png', '/assets/Cy10.png'],
-      tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+      tags: ['Next.js', 'Firebase', 'TypeScript', 'Tailwind CSS', 'Vercel'],
       repo: 'https://github.com/kenycheee/Colorfy',
       liveUrl: 'https://colorfy.vercel.app/',
     },
